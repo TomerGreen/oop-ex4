@@ -1,3 +1,6 @@
+package oop.ex4.data_structures;
+
+
 /**
  * This class represents a node in an AVL tree.
  */
@@ -26,7 +29,7 @@ public class Node {
         this.father = father;
         leftSon = null;
         rightSon = null;
-        this.height = 0;
+        height = 0;
     }
 
     /**

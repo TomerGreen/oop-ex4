@@ -1,3 +1,6 @@
+package oop.ex4.data_structures;
+
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
