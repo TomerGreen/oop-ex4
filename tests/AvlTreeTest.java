@@ -6,6 +6,6 @@ public class AvlTreeTest {
 
     @Test
     public void testGetLocation() {
-        
+
     }
 }
