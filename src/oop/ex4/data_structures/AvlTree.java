@@ -83,7 +83,17 @@ public class AvlTree {
     }
 
     private void fixHeight(Node node){
-        node.setHeight(max(node.getLeftSon().getHeight(), node.getRightSon().getHeight())+1);
+        if (node.getRightSon() == null){
+            node.setHeight(node.getLeftSon().getHeight()+1);
+        }
+        else if (node.getLeftSon() == null){
+            node.setHeight(node.getRightSon().getHeight()+1);
+        }
+
+        else {
+            node.setHeight(max(node.getLeftSon().getHeight(), node.getRightSon().getHeight()) + 1);
+        }
+
     }
 
     private void fixTree(Node newNode){
@@ -131,7 +141,7 @@ public class AvlTree {
         Node orphanNode = child.getLeftSon();
         child.setLeftSon(father);
         father.setFather(child);
-        father.setHeight(-2);
+        father.setHeight(father.getHeight()-2);
         if (grandfather != null) {
             makeGrandDadsBoy(grandfather, father, child);
             child.setFather(grandfather);
@@ -141,7 +151,9 @@ public class AvlTree {
             root = child;
         }
         father.setRightSon(orphanNode);
-        orphanNode.setFather(father);
+        if (orphanNode != null) {
+            orphanNode.setFather(father);
+        }
     }
 
     private void fixRLViolation(Node father, Node child, Node grandchild){
@@ -151,9 +163,11 @@ public class AvlTree {
         grandchild.setRightSon(child);
         child.setFather(grandchild);
         child.setLeftSon(orphanChild);
-        orphanChild.setFather(child);
-        child.setHeight(-1);
-        grandchild.setHeight(1);
+        if (orphanChild != null) {
+            orphanChild.setFather(child);
+        }
+        child.setHeight(child.getHeight()-1);
+        grandchild.setHeight(grandchild.getHeight()+1);
         fixRRViolation(father, grandchild);
     }
 
@@ -164,9 +178,11 @@ public class AvlTree {
         grandchild.setLeftSon(child);
         child.setFather(grandchild);
         child.setRightSon(orphanChild);
-        orphanChild.setFather(child);
-        child.setHeight(-1);
-        grandchild.setHeight(1);
+        if (orphanChild != null) {
+            orphanChild.setFather(child);
+        }
+        child.setHeight(child.getHeight()-1);
+        grandchild.setHeight(grandchild.getHeight()+1);
         fixLLViolation(father, grandchild);
     }
 
@@ -175,7 +191,7 @@ public class AvlTree {
         Node orphanNode = child.getRightSon();
         child.setRightSon(father);
         father.setFather(child);
-        father.setHeight(-2);
+        father.setHeight(father.getHeight()-2);
         if (grandfather != null){
             makeGrandDadsBoy(grandfather, father, child);
             child.setFather(grandfather);
@@ -185,7 +201,9 @@ public class AvlTree {
             root = child;
         }
         father.setLeftSon(orphanNode);
-        orphanNode.setFather(father);
+        if (orphanNode != null) {
+            orphanNode.setFather(father);
+        }
     }
 
     private void makeGrandDadsBoy(Node grandfather, Node father, Node child){

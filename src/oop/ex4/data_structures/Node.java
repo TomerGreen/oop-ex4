@@ -22,7 +22,7 @@ public class Node {
         this.value = value;
         leftSon = null;
         rightSon = null;
-        height = 1;
+        height = 0;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Node {
         this.value = value;
         leftSon = null;
         rightSon = null;
-        height = 1;
+        height = 0;
     }
 
     /**
@@ -45,8 +45,9 @@ public class Node {
         return height;
     }
 
-    public void setHeight(int num){
-        height += num;
+    public void setHeight(int newHeight){
+
+        height = newHeight;
     }
     /**
      * A getter method for the node's left son.
