@@ -45,8 +45,8 @@ public class Node {
         return height;
     }
 
-    public void setHeight(){
-        height++;
+    public void setHeight(int num){
+        height += num;
     }
     /**
      * A getter method for the node's left son.
@@ -107,6 +107,15 @@ public class Node {
      */
     public Node getFather(){
         return father;
+    }
+
+    /**
+     * A setter method from the node's father.
+     * @param father The new father to be assigned.
+     */
+    public void setFather(Node father){
+        this.father = father;
+
     }
 
     /**
