@@ -100,13 +100,14 @@ public class AvlTree {
         Node orphanNode = child.getLeftSon();
         child.setLeftSon(father);
         father.setFather(child);
-        if (grandfather.getRightSon() == father){
-            grandfather.setRightSon(child);
+        if (grandfather != null) {
+            makeGrandDadsBoy(grandfather, father, child);
+            child.setFather(grandfather);
         }
-        else if (grandfather.getLeftSon() == father){
-            grandfather.setLeftSon(child);
+        else{
+            child.setFather(null);
+            root = child;
         }
-        child.setFather(grandfather);
         father.setRightSon(orphanNode);
         orphanNode.setFather(father);
     }
@@ -123,7 +124,14 @@ public class AvlTree {
     }
 
     private void fixLRViolation(Node father, Node child, Node grandchild){
-
+        Node orphanChild = grandchild.getLeftSon();
+        father.setLeftSon(grandchild);
+        grandchild.setFather(father);
+        grandchild.setLeftSon(child);
+        child.setFather(grandchild);
+        child.setRightSon(orphanChild);
+        orphanChild.setFather(child);
+        fixLLViolation(father, grandchild);
     }
 
     private void fixLLViolation(Node father, Node child){
@@ -131,17 +139,27 @@ public class AvlTree {
         Node orphanNode = child.getRightSon();
         child.setRightSon(father);
         father.setFather(child);
+        if (grandfather != null){
+            makeGrandDadsBoy(grandfather, father, child);
+            child.setFather(grandfather);
+        }
+        else{
+            child.setFather(null);
+            root = child;
+        }
+        father.setLeftSon(orphanNode);
+        orphanNode.setFather(father);
+    }
+
+    private void makeGrandDadsBoy(Node grandfather, Node father, Node child){
         if (grandfather.getRightSon() == father){
             grandfather.setRightSon(child);
         }
         else if (grandfather.getLeftSon() == father){
             grandfather.setLeftSon(child);
         }
-        child.setFather(grandfather);
-        father.setLeftSon(orphanNode);
-        orphanNode.setFather(father);
-
     }
+
 
     /**
      * Given a new value to be added, returns the expected father node, before any rotation.
