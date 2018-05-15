@@ -1,5 +1,7 @@
 package oop.ex4.data_structures;
+import java.math.*;
 
+import static java.lang.Math.max;
 
 /**
  * A class representing an AVL tree.
@@ -80,25 +82,28 @@ public class AvlTree {
         return false; //newValue is contained in the tree.
     }
 
+    private void fixHeight(Node node){
+        node.setHeight(max(node.getLeftSon().getHeight(), node.getRightSon().getHeight())+1);
+    }
+
     private void fixTree(Node newNode){
         Node grandchild = newNode;
         Node child = newNode.getFather();
         Node father= child.getFather();
-        child.setHeight(1);
+        fixHeight(child);
         if (father == null){
             return;
         }
         while (father.getFather() != null){
-            father.setHeight(1);
+            fixHeight(father);
             if (checkViolations(father, child, grandchild)){
-                father.setHeight(-1);
                 return;
             }
             grandchild = child;
             child = father;
             father = father.getFather();
         }
-        father.setHeight(1);
+        fixHeight(father);
         checkViolations(father, child, grandchild);
     }
 
@@ -126,6 +131,7 @@ public class AvlTree {
         Node orphanNode = child.getLeftSon();
         child.setLeftSon(father);
         father.setFather(child);
+        father.setHeight(-2);
         if (grandfather != null) {
             makeGrandDadsBoy(grandfather, father, child);
             child.setFather(grandfather);
@@ -146,6 +152,8 @@ public class AvlTree {
         child.setFather(grandchild);
         child.setLeftSon(orphanChild);
         orphanChild.setFather(child);
+        child.setHeight(-1);
+        grandchild.setHeight(1);
         fixRRViolation(father, grandchild);
     }
 
@@ -157,6 +165,8 @@ public class AvlTree {
         child.setFather(grandchild);
         child.setRightSon(orphanChild);
         orphanChild.setFather(child);
+        child.setHeight(-1);
+        grandchild.setHeight(1);
         fixLLViolation(father, grandchild);
     }
 
@@ -165,6 +175,7 @@ public class AvlTree {
         Node orphanNode = child.getRightSon();
         child.setRightSon(father);
         father.setFather(child);
+        father.setHeight(-2);
         if (grandfather != null){
             makeGrandDadsBoy(grandfather, father, child);
             child.setFather(grandfather);
