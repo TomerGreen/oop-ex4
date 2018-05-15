@@ -1,4 +1,7 @@
 package oop.ex4.data_structures;
+import java.math.*;
+
+import static java.lang.Math.abs;
 
 
 /**
@@ -19,7 +22,7 @@ public class Node {
         this.value = value;
         leftSon = null;
         rightSon = null;
-        height = 0;
+        height = 1;
     }
 
     /**
@@ -31,19 +34,22 @@ public class Node {
         this.value = value;
         leftSon = null;
         rightSon = null;
-        height = 0;
+        height = 1;
     }
 
     /**
-     * A getter function for the node's height.
+     * A getter method for the node's height.
      * @return the node's height.
      */
     public int getHeight(){
         return height;
     }
 
+    public void setHeight(){
+        height++;
+    }
     /**
-     * A getter function for the node's left son.
+     * A getter method for the node's left son.
      * @return the node's left son.
      */
     public Node getLeftSon(){
@@ -51,7 +57,25 @@ public class Node {
     }
 
     /**
-     * A getter function for the node's right son.
+     * A setter mthod for the node's left son.
+     * @param newValue the new son's value.
+     */
+    public Node setLeftSon(int newValue){
+        leftSon = new Node(this, newValue);
+        return leftSon;
+    }
+
+    /**
+     * A setter method for the node's left son.
+     * @param node the ndoe to be the new left son.
+     */
+    public Node setLeftSon(Node node){
+        leftSon = node;
+        return leftSon;
+    }
+
+    /**
+     * A getter method for the node's right son.
      * @return the node's right son.
      */
     public Node getRightSon(){
@@ -59,7 +83,26 @@ public class Node {
     }
 
     /**
-     * A getter function for the node's father.
+     * A setter method for the node's right son.
+     * @param newValue the new son's value.
+     */
+    public Node setRightSon(int newValue){
+        rightSon = new Node(this, newValue);
+        return rightSon;
+    }
+
+    /**
+     * A setter method for the node's right son.
+     * @param node the ndoe to be the new right son.
+     */
+    public Node setRightSon(Node node){
+        rightSon = node;
+        return rightSon;
+    }
+
+
+    /**
+     * A getter method for the node's father.
      * @return the node's father.
      */
     public Node getFather(){
@@ -67,10 +110,27 @@ public class Node {
     }
 
     /**
-     * A getter function for the node's numeric value.
+     * A getter method for the node's numeric value.
      * @return the node's numeric value.
      */
     public int getValue(){
         return value;
+    }
+
+    /**
+     * Returns the height difference between the two children of a node.
+     * @return the height difference between the two children of a node.
+     */
+    public int getHeightDiff(){
+        if(leftSon == null && rightSon == null){
+            return 0;
+        }
+        else if(leftSon == null){
+            return rightSon.getHeight();
+        }
+        else if(rightSon == null){
+            return -leftSon.getHeight();
+        }
+        return abs(rightSon.height- leftSon.height);
     }
 }
