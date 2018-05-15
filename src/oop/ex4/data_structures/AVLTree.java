@@ -27,7 +27,6 @@ public class AvlTree {
         return false; //newValue is contained in the tree.
     }
 
-
     private void fixTree(Node newNode){
         Node grandchild = newNode;
         Node child = newNode.getFather();
