@@ -10,12 +10,12 @@ public class AVLTree {
     public boolean add(int newValue){
         Node father = getLocation(newValue);
         if(father != null){
-            Node newNode;
+            Node newNode = new Node(father, newValue);
             if (newValue > father.getValue()){
-                newNode = father.setRightSon(newValue);
+                father.setRightSon(newNode);
             }
             else{
-                newNode = father.setLeftSon(newValue);
+                father.setLeftSon(newNode);
             }
             fixTree(newNode);
             return true;
