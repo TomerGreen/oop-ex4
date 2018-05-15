@@ -22,7 +22,7 @@ public class Node {
         this.value = value;
         leftSon = null;
         rightSon = null;
-        height = 1;
+        height = 0;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Node {
         this.value = value;
         leftSon = null;
         rightSon = null;
-        height = 1;
+        height = 0;
     }
 
     /**

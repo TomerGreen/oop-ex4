@@ -35,7 +35,7 @@ public class AvlTree {
     }
 
     public boolean add(int newValue){
-        Node father = getLocation(newValue);
+        Node father = expectedParent(newValue);
         if(father != null){
             Node newNode = new Node(father, newValue);
             if (newValue > father.getValue()){
@@ -140,23 +140,52 @@ public class AvlTree {
         child.setFather(grandfather);
         father.setLeftSon(orphanNode);
         orphanNode.setFather(father);
-
     }
 
     /**
-     * Given a new value to be added, returns the expected father node, before any rotation.
-     * @param newValue The value to be added.
-     * @return The expected father node if newValue is not in the tree, null otherwise.
+     * Returns whether a value is in the tree.
+     * @param searchVal The value to be searched.
+     * @return The depth of the node with that value, or -1 if it does not exist.
      */
-    private Node getLocation(int newValue){
+    public int contains(int searchVal){
+        Node candidate = valueToNode(searchVal);
+        if (candidate == null || candidate.getValue() != searchVal) {
+            return -1;
+        }
+        else {
+            return candidate.getHeight();
+        }
+    }
+
+    /**
+     * @param searchVal The value to be searched.
+     * @return The expected parent node of the value if it is not in the tree, and null otherwise.
+     */
+    private Node expectedParent(int searchVal) {
+        Node candidate = valueToNode(searchVal);
+        if (candidate == null || searchVal == candidate.getValue()) {
+            return null;
+        }
+        return candidate;
+    }
+
+    /**
+     * Returns a node with a given value if it exists, or the node that is expected to be its
+     * parent if it was added to the tree (prior to rotations).
+     * This helper method is used by several API methods to prevent probing the tree multiple times.
+     * @param searchVal The value to be searched.
+     * @return The expected father node if searchValue is not in the tree, or the node with the same value.
+     * Returns null only if the tree is empty.
+     */
+    private Node valueToNode(int searchVal){
         Node currNode = root;  // The node we're comparing too, and might be returned.
         Node nextNode = root;  // The node we proceed to, or stop if it's null.
         while (nextNode != null) {
             currNode = nextNode;
-            if (newValue == currNode.getValue()) {
-                return null;
+            if (searchVal == currNode.getValue()) {
+                return currNode;
             }
-            else if (newValue > currNode.getValue()) {
+            else if (searchVal > currNode.getValue()) {
                 nextNode = currNode.getRightSon();
             }
             else {
@@ -165,10 +194,5 @@ public class AvlTree {
         }
         return currNode;
     }
-
-    private int contains(int searchVal){
-        return 1;
-    }
-
 
 }
