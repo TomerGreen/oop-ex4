@@ -5,8 +5,8 @@ package oop.ex4.data_structures;
  * This class represents a node in an AVL tree.
  */
 public class Node {
-    /*The height of the node.*/
-    private int height;
+    /*The height and the numeric value of the node.*/
+    private int height, value;
     /*The node's pointers to its father, left son and right son. */
     private Node rightSon, leftSon, father;
 
@@ -14,8 +14,9 @@ public class Node {
     /**
      * An Empty constructor of Node.
      */
-    Node(){
+    Node(int value){
         this.father = null;
+        this.value = value;
         leftSon = null;
         rightSon = null;
         height = 0;
@@ -25,8 +26,9 @@ public class Node {
      * A constructor of Node.
      * @param father The node's father.
      */
-    Node(Node father){
+    Node(Node father, int value){
         this.father = father;
+        this.value = value;
         leftSon = null;
         rightSon = null;
         height = 0;
@@ -62,5 +64,13 @@ public class Node {
      */
     public Node getFather(){
         return father;
+    }
+
+    /**
+     * A getter function for the node's numeric value.
+     * @return the node's numeric value.
+     */
+    public int getValue(){
+        return value;
     }
 }
