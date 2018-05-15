@@ -27,4 +27,15 @@ public class AvlTreeTest {
         assertTrue("Contains did not return 2 for existent value depth", tree.contains(-1) == 0);
         assertTrue("Contains did not return 2 for existent value depth", tree.contains(0) == 2);
     }
+
+    @Test
+    public void testFindMinAndMaxNodes() {
+        System.out.println(AvlTree.findMinNodes(0));
+        assertEquals(1, AvlTree.findMinNodes(0));
+        assertEquals(1, AvlTree.findMaxNodes(0));
+        assertEquals(2, AvlTree.findMinNodes(1));
+        assertEquals(3, AvlTree.findMaxNodes(1));
+        assertEquals(4, AvlTree.findMinNodes(2));
+        assertEquals(7, AvlTree.findMaxNodes(2));
+    }
 }

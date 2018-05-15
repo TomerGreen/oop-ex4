@@ -34,6 +34,32 @@ public class AvlTree {
         this.root = tree.root;
     }
 
+    /**
+     * Returns the maximum number of nodes in an AVL tree of a given height.
+     * @param h An AVL tree height
+     * @return The minimum number of nodes in a tree of that height.
+     */
+    public static int findMaxNodes(int h) {
+        int sum = 0;
+        int layer = 0;  // The layer number in the tree, 0 being root.
+        int nodesInLayer = 1;  // The number of nodes in that layer.
+        while (layer <= h) {
+            sum += nodesInLayer;
+            layer++;
+            nodesInLayer *= 2;
+        }
+        return sum;
+    }
+
+    /**
+     * Returns the minimum number of nodes in an AVL tree of a given height.
+     * @param h An AVL tree height
+     * @return The minimum number of nodes in a tree of that height.
+     */
+    public static int findMinNodes(int h) {
+        return findMaxNodes(h-1) + 1;
+    }
+
     public boolean add(int newValue){
         Node father = expectedParent(newValue);
         if(father != null){
@@ -158,9 +184,6 @@ public class AvlTree {
         else if (grandfather.getLeftSon() == father){
             grandfather.setLeftSon(child);
         }
-        child.setFather(grandfather);
-        father.setLeftSon(orphanNode);
-        orphanNode.setFather(father);
     }
 
     /**
