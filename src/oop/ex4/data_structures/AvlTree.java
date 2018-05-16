@@ -296,6 +296,11 @@ public class AvlTree {
         }
     }
 
+    /**
+     * Removes the node with the given value from the tree, if it exists.
+     * @param toDelete The value to be deleted.
+     * @return True if was successfully deleted, false otherwise.
+     */
     public boolean delete(int toDelete){
         Node deleteNode = valueToNode(toDelete);
         if (deleteNode.getValue() != toDelete){
@@ -363,6 +368,9 @@ public class AvlTree {
         return null;
     }
 
+    /*
+    Changes the old son of an ancestor with a new son
+     */
     private void changeAncestorsChild(Node father, Node oldSon, Node newSon){
         if (father.getLeftSon() == oldSon){
             father.setLeftSon(newSon);
