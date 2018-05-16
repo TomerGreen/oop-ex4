@@ -125,20 +125,21 @@ public class AvlTree {
 
     /*
     Climbs up from the leaf to the root and checks for violations.
+    Returns the node at which the violation happened.
      */
-    private void fixTree(Node newNode){
+    private Node fixTree(Node newNode){
         Node grandchild = newNode;
         Node child = newNode.getFather();
         Node father= child.getFather();
         fixHeight(child);
         if (father == null){
-            return;
+            return null;
         }
         while (father.getFather() != null){
             fixHeight(father);
             if (checkViolations(father, child, grandchild)){
 //                System.out.println("exiting check violations..");
-                return;
+                return father;
             }
             grandchild = child;
             child = father;
@@ -149,6 +150,7 @@ public class AvlTree {
 //        System.out.println("Entering check violations");
         checkViolations(father, child, grandchild);
 //        System.out.println("Leaving fixTree..");
+        return null;
     }
 
     /**
@@ -213,7 +215,7 @@ public class AvlTree {
         father.setFather(child);
         father.setHeight(father.getHeight()-2);
         if (grandfather != null) {
-            makeGrandDadsBoy(grandfather, father, child);
+            changeAncestorsChild(grandfather, father, child);
             child.setFather(grandfather);
         }
         else{
@@ -280,7 +282,7 @@ public class AvlTree {
         father.setFather(child);
         father.setHeight(father.getHeight()-2);
         if (grandfather != null){
-            makeGrandDadsBoy(grandfather, father, child);
+            changeAncestorsChild(grandfather, father, child);
             child.setFather(grandfather);
         }
         else{
@@ -294,19 +296,104 @@ public class AvlTree {
         }
     }
 
-    /*
-    In case the violation does not occur on the root, updates the pointers of the ancestor node.
-     */
-    private void makeGrandDadsBoy(Node grandfather, Node father, Node child){
-        if (grandfather.getRightSon() == father){
-            grandfather.setRightSon(child);
+    public boolean delete(int toDelete){
+        Node deleteNode = valueToNode(toDelete);
+        if (deleteNode.getValue() != toDelete){
+            return false; //value is not in the tree
         }
-        else if (grandfather.getLeftSon() == father){
-            grandfather.setLeftSon(child);
+        Node father = deleteNode.getFather();
+        if (isLeaf(deleteNode)) {
+            changeAncestorsChild(father, deleteNode, null);
+            deleteNode = null;
+            return true;
+        }
+
+        Node child = singleChilded(deleteNode);
+        if (child != null){
+            child.setFather(father);
+            changeAncestorsChild(father, deleteNode, child);
+            deleteNode = null;
+            return true;
+        }
+
+        Node successor = findSuccessor(deleteNode);
+        swap(deleteNode, successor);
+        father = deleteNode.getFather();
+        changeAncestorsChild(father, deleteNode, null);
+        fixHeight(father);
+        Node curNode = fixTree(father);
+        while (curNode != null) {
+            curNode = fixTree(curNode);
+        }
+        return true;
+    }
+
+    /*
+    Swaps two nodes and adjusts their pointers.
+     */
+    private void swap(Node node1, Node node2){
+        Node node1Father = node1.getFather();
+        Node node1RightSon = node1.getRightSon();
+        Node node1LeftSon = node1.getLeftSon();
+        Node node2Father = node2.getFather();
+        Node node2RightSon = node2.getRightSon();
+        Node node2LeftSon = node2.getLeftSon();
+
+        node2.setFather(node1Father);
+        changeAncestorsChild(node1Father, node1, node2);
+        node2.setLeftSon(node1LeftSon);
+        node1LeftSon.setFather(node2);
+        node2.setRightSon(node1RightSon);
+        node1RightSon.setFather(node2);
+
+        node1.setFather(node2Father);
+        changeAncestorsChild(node2Father, node2, node1);
+        node1.setLeftSon(node2LeftSon);
+        node2LeftSon.setFather(node1);
+        node1.setRightSon(node2RightSon);
+        node2RightSon.setFather(node1);
+
+
+    }
+
+    /*
+    Dummy method to be replaced by real implementation.
+     */
+    private Node findSuccessor(Node node){
+        return null;
+    }
+
+    private void changeAncestorsChild(Node father, Node oldSon, Node newSon){
+        if (father.getLeftSon() == oldSon){
+            father.setLeftSon(newSon);
+        }
+        else if (father.getRightSon() == oldSon){
+            father.setRightSon(newSon);
         }
     }
 
-    /**
+    /*
+    Checks if a node is a leaf.
+     */
+    private boolean isLeaf(Node node){
+        return node.getHeight() == 0;
+    }
+
+    /*
+    Checks if a node only has one son.
+    Returns the single child.
+     */
+    private Node singleChilded(Node node){
+        if(node.getLeftSon() != null && node.getRightSon() == null){
+            return node.getLeftSon();
+        }
+        if (node.getLeftSon() == null && node.getRightSon() != null){
+            return node.getRightSon();
+        }
+        return null;
+    }
+
+     /**
      * Returns whether a value is in the tree.
      * @param searchVal The value to be searched.
      * @return The depth of the node with that value, or -1 if it does not exist.
@@ -343,7 +430,7 @@ public class AvlTree {
      * Returns null only if the tree is empty.
      */
     private Node valueToNode(int searchVal){
-        Node currNode = root;  // The node we're comparing too, and might be returned.
+        Node currNode = root;  // The node we're comparing to, and might be returned.
         Node nextNode = root;  // The node we proceed to, or stop if it's null.
         while (nextNode != null) {
             currNode = nextNode;
