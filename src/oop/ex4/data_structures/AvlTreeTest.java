@@ -33,9 +33,12 @@ public class AvlTreeTest {
         assertTrue("Failed to add non-existent value", tree.add(-1000));
         assertTrue("Failed to add non-existent value", tree.add(-10000));
         assertTrue("Failed to add non-existent value", tree.add(-100000));
+    }
 
+    @Test
+    public void testVioations(){
         //checking RL Violation
-        tree = new AvlTree();
+        AvlTree tree = new AvlTree();
         assertTrue("Failed to add non-existent value", tree.add(10));
         assertTrue("Failed to add non-existent value", tree.add(7));
         assertTrue("Failed to add non-existent value", tree.add(5));
@@ -45,6 +48,8 @@ public class AvlTreeTest {
         assertTrue("Failed to add non-existent value", tree.add(10));
         assertTrue("Failed to add non-existent value", tree.add(17));
         assertTrue("Failed to add non-existent value", tree.add(15));
+
+
     }
 
     @Test

@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aaee164f-1a20-4709-854f-7daf59989dab" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/oop-ex4/.gitignore" afterPath="$PROJECT_DIR$/out/production/oop-ex4/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/out/production/oop-ex4/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/oop-ex4/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/oop-ex4/oop/ex4/data_structures/AVLTree.class" afterPath="$PROJECT_DIR$/out/production/oop-ex4/oop/ex4/data_structures/AVLTree.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/oop-ex4/oop/ex4/data_structures/Node.class" afterPath="$PROJECT_DIR$/out/production/oop-ex4/oop/ex4/data_structures/Node.class" />
       <change beforePath="$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTree.java" afterPath="$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTree.java" />
       <change beforePath="$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTreeTest.java" afterPath="$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTreeTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/oop/ex4/data_structures/Node.java" afterPath="$PROJECT_DIR$/src/oop/ex4/data_structures/Node.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AvlTree.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AvlTree.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-72">
-              <caret line="205" column="9" lean-forward="true" selection-start-line="205" selection-start-column="9" selection-end-line="205" selection-end-column="9" />
+            <state relative-caret-position="4353">
+              <caret line="248" column="42" lean-forward="true" selection-start-line="248" selection-start-column="42" selection-end-line="248" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1538#1539#0" expanded="true" />
@@ -51,12 +45,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AvlTreeTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AvlTreeTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTreeTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1000">
-              <caret line="44" column="63" lean-forward="false" selection-start-line="44" selection-start-column="63" selection-end-line="44" selection-end-column="63" />
-              <folding />
+            <state relative-caret-position="475">
+              <caret line="47" column="16" lean-forward="true" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,8 +101,8 @@
         <option value="$PROJECT_DIR$/src/oop/ex4/data_structures/NodeTest.java" />
         <option value="$PROJECT_DIR$/src/oop/ex4/data_structures/AVLTree.java" />
         <option value="$PROJECT_DIR$/src/oop/ex4/data_structures/Node.java" />
-        <option value="$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTree.java" />
         <option value="$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTreeTest.java" />
+        <option value="$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTree.java" />
       </list>
     </option>
   </component>
@@ -427,9 +423,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="AvlTreeTest - 2018.05.15 at 21h 46m 50s.xml">
-      <configuration name="AvlTreeTest" configurationId="AndroidJUnit" />
-    </history-entry>
     <history-entry file="AvlTreeTest - 2018.05.15 at 21h 47m 06s.xml">
       <configuration name="AvlTreeTest" configurationId="AndroidJUnit" />
     </history-entry>
@@ -455,6 +448,9 @@
       <configuration name="AvlTreeTest" configurationId="AndroidJUnit" />
     </history-entry>
     <history-entry file="AvlTreeTest - 2018.05.15 at 21h 57m 16s.xml">
+      <configuration name="AvlTreeTest" configurationId="AndroidJUnit" />
+    </history-entry>
+    <history-entry file="AvlTreeTest - 2018.05.16 at 12h 28m 02s.xml">
       <configuration name="AvlTreeTest" configurationId="AndroidJUnit" />
     </history-entry>
   </component>
@@ -932,23 +928,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTreeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="47" column="16" lean-forward="true" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-72">
-          <caret line="205" column="9" lean-forward="true" selection-start-line="205" selection-start-column="9" selection-end-line="205" selection-end-column="9" />
+        <state relative-caret-position="4353">
+          <caret line="248" column="42" lean-forward="true" selection-start-line="248" selection-start-column="42" selection-end-line="248" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1538#1539#0" expanded="true" />
             <element signature="e#1582#1583#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTreeTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1000">
-          <caret line="44" column="63" lean-forward="false" selection-start-line="44" selection-start-column="63" selection-end-line="44" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>

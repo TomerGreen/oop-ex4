@@ -62,6 +62,12 @@ public class AvlTree {
         return findMaxNodes(h-1) + 1;
     }
 
+    /**
+     * Add a new node with the given key to the tree.
+     * @param newValue the value of the new node to add.
+     * @return true if the value to add is not already in the tree and it was successfully added,
+     * false otherwise.
+     */
     public boolean add(int newValue){
         Node father = expectedParent(newValue);
         if(father != null){
@@ -82,6 +88,9 @@ public class AvlTree {
         return false; //newValue is contained in the tree.
     }
 
+    /*
+    Updates the heights of a node according to its children's heights.
+     */
     private void fixHeight(Node node){
         if (node.getRightSon() == null){
             node.setHeight(node.getLeftSon().getHeight()+1);
@@ -96,6 +105,9 @@ public class AvlTree {
 
     }
 
+    /*
+    Climbs up from the leaf to the root and checks for violations.
+     */
     private void fixTree(Node newNode){
         Node grandchild = newNode;
         Node child = newNode.getFather();
@@ -117,7 +129,15 @@ public class AvlTree {
         checkViolations(father, child, grandchild);
     }
 
-    private boolean checkViolations(Node father, Node child, Node grandchild){
+    /**
+     * This method checks if the AVL property is violated in a specific node.
+     * MAKE PRIVATE WHEN FINISHED DEBUGGING
+     * @param father
+     * @param child
+     * @param grandchild
+     * @return
+     */
+    public boolean checkViolations(Node father, Node child, Node grandchild){
         if (father.getHeightDiff() > 1){
             if(child == father.getRightSon() &&  grandchild == child.getRightSon()){
                 fixRRViolation(father, child);
@@ -136,6 +156,9 @@ public class AvlTree {
         return false;
     }
 
+    /*
+    Fixes an RR violation.
+     */
     private void fixRRViolation(Node father, Node child){
         Node grandfather = father.getFather();
         Node orphanNode = child.getLeftSon();
@@ -156,6 +179,9 @@ public class AvlTree {
         }
     }
 
+    /*
+    Fixes an RL violation.
+     */
     private void fixRLViolation(Node father, Node child, Node grandchild){
         Node orphanChild = grandchild.getRightSon();
         father.setRightSon(grandchild);
@@ -171,6 +197,9 @@ public class AvlTree {
         fixRRViolation(father, grandchild);
     }
 
+    /*
+    Fixes an LR violation.
+     */
     private void fixLRViolation(Node father, Node child, Node grandchild){
         Node orphanChild = grandchild.getLeftSon();
         father.setLeftSon(grandchild);
@@ -186,6 +215,9 @@ public class AvlTree {
         fixLLViolation(father, grandchild);
     }
 
+    /*
+    Fixes an LL violation.
+     */
     private void fixLLViolation(Node father, Node child){
         Node grandfather = father.getFather();
         Node orphanNode = child.getRightSon();
@@ -206,6 +238,9 @@ public class AvlTree {
         }
     }
 
+    /*
+    In case the violation does not occur on the root, updates the pointers of the ancestor node.
+     */
     private void makeGrandDadsBoy(Node grandfather, Node father, Node child){
         if (grandfather.getRightSon() == father){
             grandfather.setRightSon(child);
