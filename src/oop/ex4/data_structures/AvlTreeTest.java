@@ -65,13 +65,30 @@ public class AvlTreeTest {
         assertEquals("Wrong height", tree.contains(20), 0);
         assertEquals("Wrong height", tree.contains(25), 0);
         assertEquals("Wrong height", tree.contains(22), 1);
+        //Son pointers
         assertEquals("Wrong pointers", 22, tree.getRoot().getRightSon().getValue());
         assertEquals("Wrong pointers", 25, tree.getRoot().getRightSon().getRightSon().getValue());
         assertEquals("Wrong pointers", 20, tree.getRoot().getRightSon().getLeftSon().getValue());
         assertEquals("Wrong pointers", 5, tree.getRoot().getLeftSon().getValue());
         assertEquals("Wrong pointers", 10, tree.getRoot().getLeftSon().getRightSon().getValue());
         assertEquals("Wrong pointers", 1, tree.getRoot().getLeftSon().getLeftSon().getValue());
+        assertEquals("Wrong pointers", null, tree.getRoot().getLeftSon().getLeftSon().getLeftSon());
+        assertEquals("Wrong pointers", null, tree.getRoot().getLeftSon().getLeftSon().getRightSon());
+        assertEquals("Wrong pointers", null, tree.getRoot().getLeftSon().getRightSon().getLeftSon());
+        assertEquals("Wrong pointers", null, tree.getRoot().getLeftSon().getRightSon().getRightSon());
+        assertEquals("Wrong pointers", null, tree.getRoot().getRightSon().getLeftSon().getLeftSon());
+        assertEquals("Wrong pointers", null, tree.getRoot().getRightSon().getLeftSon().getRightSon());
+        assertEquals("Wrong pointers", null, tree.getRoot().getRightSon().getRightSon().getLeftSon());
+        assertEquals("Wrong pointers", null, tree.getRoot().getRightSon().getRightSon().getRightSon());
 
+        //Father pointers
+        assertEquals("Wrong pointers", null, tree.getRoot().getFather());
+        assertEquals("Wrong pointers", 17, tree.getRoot().getRightSon().getFather().getValue());
+        assertEquals("Wrong pointers", 17, tree.getRoot().getLeftSon().getFather().getValue());
+        assertEquals("Wrong pointers", 22, tree.getRoot().getRightSon().getRightSon().getFather().getValue());
+        assertEquals("Wrong pointers", 22, tree.getRoot().getRightSon().getLeftSon().getFather().getValue());
+        assertEquals("Wrong pointers", 5, tree.getRoot().getLeftSon().getRightSon().getFather().getValue());
+        assertEquals("Wrong pointers", 5, tree.getRoot().getLeftSon().getLeftSon().getFather().getValue());
 
 
 
