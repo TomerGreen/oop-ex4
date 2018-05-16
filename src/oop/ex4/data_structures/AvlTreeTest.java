@@ -45,6 +45,7 @@ public class AvlTreeTest {
         assertEquals("Wrong height", tree.contains(10), 0);
         assertEquals("Wrong height", tree.contains(1), 0);
         assertEquals("Wrong height", tree.contains(5), 1);
+        assertEquals("Wrong size", 3, tree.size());
         assertTrue("Failed to add non-existent value", tree.add(17));
         assertTrue("Failed to add non-existent value", tree.add(20));
         assertTrue("Shouldn't be any violations!", tree.isAVLOkay(tree.getRoot()));
@@ -54,6 +55,7 @@ public class AvlTreeTest {
         assertEquals("Wrong height", tree.contains(10), 0);
         assertEquals("Wrong height", tree.contains(20), 0);
         assertEquals("Wrong height", tree.contains(1), 0);
+        assertEquals("Wrong size", 5, tree.size());
         //Adding an RL violation
         assertTrue("Failed to add non-existent value", tree.add(25));
         assertTrue("Failed to add non-existent value", tree.add(22));
@@ -65,6 +67,7 @@ public class AvlTreeTest {
         assertEquals("Wrong height", tree.contains(20), 0);
         assertEquals("Wrong height", tree.contains(25), 0);
         assertEquals("Wrong height", tree.contains(22), 1);
+        assertEquals("Wrong size", 7, tree.size());
         //Son pointers
         assertEquals("Wrong pointers", 22, tree.getRoot().getRightSon().getValue());
         assertEquals("Wrong pointers", 25, tree.getRoot().getRightSon().getRightSon().getValue());

@@ -8,6 +8,9 @@ import static java.lang.Math.max;
  */
 public class AvlTree {
 
+    /* The number of nodes in the tree */
+    private int size;
+
     /** The root node. */
     protected Node root;
 
@@ -16,6 +19,7 @@ public class AvlTree {
      */
     public AvlTree() {
         root = null;
+        size = 0;
     }
 
     /**
@@ -23,6 +27,7 @@ public class AvlTree {
      * @param data The array of values that
      */
     public AvlTree(int[] data) {
+        size = 0;
         for (int value : data) {
             this.add(value);
         }
@@ -33,6 +38,7 @@ public class AvlTree {
      * @param tree The copied tree.
      */
     public AvlTree(AvlTree tree) {
+        size = 0;
         this.root = tree.root;
     }
 
@@ -63,6 +69,14 @@ public class AvlTree {
     }
 
     /**
+     * returns the number of nodes in the tree.
+     * @return The nunmber of nodes in the tree.
+     */
+    public int size(){
+        return size;
+    }
+
+    /**
      * Add a new node with the given key to the tree.
      * @param newValue the value of the new node to add.
      * @return true if the value to add is not already in the tree and it was successfully added,
@@ -81,10 +95,12 @@ public class AvlTree {
 //            System.out.println("Added node with value " + newValue + " before fixTree, father is " + newNode.getFather().getValue());
             fixTree(newNode);
 //            System.out.println("Added node with value " + newValue + " after, father is " + newNode.getFather().getValue());
+            size++;
             return true;
         }
         else if (father == null && root == null){   //The tree is empty!
             root = new Node(newValue);
+            size++;
             return true;
         }
         return false; //newValue is contained in the tree.
