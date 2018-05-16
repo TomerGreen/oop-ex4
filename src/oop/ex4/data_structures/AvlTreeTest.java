@@ -26,29 +26,43 @@ public class AvlTreeTest {
         assertTrue("Contains did not return 2 for existent value depth", tree.contains(1) == 1);
         assertTrue("Contains did not return 2 for existent value depth", tree.contains(-1) == 0);
         assertTrue("Contains did not return 2 for existent value depth", tree.contains(0) == 2);
-        // checking RR and LL Violations
-        assertTrue("Failed to add non-existent value", tree.add(1000));
-        assertTrue("Failed to add non-existent value", tree.add(-10));
-        assertTrue("Failed to add non-existent value", tree.add(-100));
-        assertTrue("Failed to add non-existent value", tree.add(-1000));
-        assertTrue("Failed to add non-existent value", tree.add(-10000));
-        assertTrue("Failed to add non-existent value", tree.add(-100000));
+
     }
 
     @Test
-    public void testVioations(){
-        //checking RL Violation
+    public void testViolations(){
         AvlTree tree = new AvlTree();
+        System.out.println("\n Checking RR Violation");
+        //checking RR Violation
+        assertTrue("Failed to add non-existent value", tree.add(1));
+        assertTrue("Failed to add non-existent value", tree.add(5));
+        assertTrue("Failed to add non-existent value", tree.add(10));
+        assertTrue("Shouldn't be any violations!", tree.isAVLOkay(tree.getRoot()));
+
+        System.out.println("\n Checking LL Violation");
+        //checking LL Violation
+        tree = new AvlTree();
+        assertTrue("Failed to add non-existent value", tree.add(10));
+        assertTrue("Failed to add non-existent value", tree.add(5));
+        assertTrue("Failed to add non-existent value", tree.add(1));
+        assertTrue("Shouldn't be any violations!", tree.isAVLOkay(tree.getRoot()));
+
+
+        System.out.println("\n Checking LR Violation");
+        //checking LR Violation
+        tree = new AvlTree();
         assertTrue("Failed to add non-existent value", tree.add(10));
         assertTrue("Failed to add non-existent value", tree.add(7));
         assertTrue("Failed to add non-existent value", tree.add(5));
+        assertTrue("Shouldn't be any violations!", tree.isAVLOkay(tree.getRoot()));
 
+        System.out.println("\n Checking RL Violation");
         //checking RL Violation
         tree = new AvlTree();
         assertTrue("Failed to add non-existent value", tree.add(10));
         assertTrue("Failed to add non-existent value", tree.add(17));
         assertTrue("Failed to add non-existent value", tree.add(15));
-
+        assertTrue("Shouldn't be any violations!", tree.isAVLOkay(tree.getRoot()));
 
     }
 

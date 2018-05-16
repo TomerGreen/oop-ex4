@@ -78,7 +78,9 @@ public class AvlTree {
             else{
                 father.setLeftSon(newNode);
             }
+//            System.out.println("Added node with value " + newValue + " before fixTree, father is " + newNode.getFather().getValue());
             fixTree(newNode);
+//            System.out.println("Added node with value " + newValue + " after, father is " + newNode.getFather().getValue());
             return true;
         }
         else if (father == null && root == null){   //The tree is empty!
@@ -119,26 +121,53 @@ public class AvlTree {
         while (father.getFather() != null){
             fixHeight(father);
             if (checkViolations(father, child, grandchild)){
+//                System.out.println("exiting check violations..");
                 return;
             }
             grandchild = child;
             child = father;
             father = father.getFather();
+
         }
         fixHeight(father);
+//        System.out.println("Entering check violations");
         checkViolations(father, child, grandchild);
+//        System.out.println("Leaving fixTree..");
     }
 
     /**
-     * This method checks if the AVL property is violated in a specific node.
-     * MAKE PRIVATE WHEN FINISHED DEBUGGING
-     * @param father
-     * @param child
-     * @param grandchild
+     * DEBUG METHOD - DELETE WHEN SUBMITTING
      * @return
      */
-    public boolean checkViolations(Node father, Node child, Node grandchild){
+    public boolean isAVLOkay(Node node){
+        if (node == null){
+            return true;
+        }
+//        System.out.println("checking node with value " + node.getValue());
+        if (node.getLeftSon() != null || node.getRightSon() != null){
+            if (node.getHeightDiff() > 1){
+                return false;
+            }
+           return isAVLOkay(node.getLeftSon()) && isAVLOkay(node.getRightSon());
+
+        }
+        return true;
+    }
+
+    /**
+     * DEBUG METHOD - DELETE WHEN SUBMITTING
+     * @return
+     */
+    public Node getRoot(){
+        return root;
+    }
+
+    /*
+     * This method checks if the AVL property is violated in a specific node.
+     */
+    private boolean checkViolations(Node father, Node child, Node grandchild){
         if (father.getHeightDiff() > 1){
+//            System.out.println("For the node " + father.getValue() + " a violation was found.");
             if(child == father.getRightSon() &&  grandchild == child.getRightSon()){
                 fixRRViolation(father, child);
             }
@@ -151,6 +180,7 @@ public class AvlTree {
             else if (child == father.getLeftSon() && grandchild == child.getLeftSon()){
                 fixLLViolation(father, child);
             }
+//            System.out.println("Leaving checkViolations");
             return true;
         }
         return false;
@@ -160,6 +190,7 @@ public class AvlTree {
     Fixes an RR violation.
      */
     private void fixRRViolation(Node father, Node child){
+//        System.out.println("fixing RR");
         Node grandfather = father.getFather();
         Node orphanNode = child.getLeftSon();
         child.setLeftSon(father);
@@ -171,18 +202,23 @@ public class AvlTree {
         }
         else{
             child.setFather(null);
+//            System.out.println("Setting new root as " + child.getValue());
             root = child;
         }
         father.setRightSon(orphanNode);
+//        System.out.println("father has right son");
         if (orphanNode != null) {
+//            System.out.println("Orphan isn't null");
             orphanNode.setFather(father);
         }
+//        System.out.println("leaving RR");
     }
 
     /*
     Fixes an RL violation.
      */
     private void fixRLViolation(Node father, Node child, Node grandchild){
+//        System.out.println("fixing RL");
         Node orphanChild = grandchild.getRightSon();
         father.setRightSon(grandchild);
         grandchild.setFather(father);
@@ -195,12 +231,14 @@ public class AvlTree {
         child.setHeight(child.getHeight()-1);
         grandchild.setHeight(grandchild.getHeight()+1);
         fixRRViolation(father, grandchild);
+//        System.out.println("Leaving RL");
     }
 
     /*
     Fixes an LR violation.
      */
     private void fixLRViolation(Node father, Node child, Node grandchild){
+//        System.out.println("fixing LR");
         Node orphanChild = grandchild.getLeftSon();
         father.setLeftSon(grandchild);
         grandchild.setFather(father);
@@ -219,6 +257,7 @@ public class AvlTree {
     Fixes an LL violation.
      */
     private void fixLLViolation(Node father, Node child){
+//        System.out.println("fixing LL");
         Node grandfather = father.getFather();
         Node orphanNode = child.getRightSon();
         child.setRightSon(father);
@@ -230,6 +269,7 @@ public class AvlTree {
         }
         else{
             child.setFather(null);
+//            System.out.println("Setting new root as " + child.getValue());
             root = child;
         }
         father.setLeftSon(orphanNode);
