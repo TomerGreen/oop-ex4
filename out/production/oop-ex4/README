@@ -6,164 +6,28 @@ tomerg
 =      File description     =
 =============================
 
-TableElement.java - An abstract class implementing an element in a set. That element can remove and add values in it
-(only one value in the case of closed hashing), check if a value is contained within it, etc.
-OpenHashElement.java - A wrapper class for a LinkedList that extends the TableElement class. Open Hash Elements can
-return their content as an array.
-ClosedHashElement.java - A class inheriting from TableElement that Implements an element in a closed hash set. Elements
-are able to return whether or not a value was deleted from them, which is used when looking up the closed hash set.
-SimpleHashSet.java - An implementation of the SimpleHashSet.
-ClosedHashSet.java - An implementation of the ClosedHashSet.
-OpenHashSet.java - An implementation of the OpenHashSet.
-CollectionFacadeSet - An implementation of the OpenFacadeSet.
-SimpleSetPerformanceAnalyzer - An implementation of SimpleSetPerformanceAnalyzer.
 
 =============================
 =          Design           =
 =============================
 
-Both OpenHashSet and ClosedHashSet hold an array of the corresponding TableElement, which is the table.
-I chose this design because a table element can be seen as an object implementing a certain protocol - checking if it
-contains a value, adding a value to it, or erasing some or all of its content, alongside some unique methods to each
-type of set element, like the ClosedHashElement which can return whether or not a value was deleted from it before the
-table as last restarted.
-
-ANSWER TO QUESTION ON PDF: In the case of OpenHashElement, the class is also used as a wrapper for the linked list
-which represents the content of the table cell. This design enables to hold an array of objects that are able to
-operate on a linked list, thus utilizing the fact that lists are easy to search, add to etc.
-
-ANSWER TO QUESTION ON PDF: As for ClosedHashElement, the object holds a field which can indicate if a value was deleted
-from it after the last rehasing, or not. This allows us to know that we should continue to search even in case of an
-empty cell table, since it might be a deleted value that shares a clamped index with the value we're searching for.
 
 =============================
 =  Implementation details   =
 =============================
-* I've decided that rehashing up and down will be done by creating a new table array, which is a field representing
-the hash table of the different hash sets. The alternative was to recreate the entire hash set object, which I found
-unnecessary, since it required having another constructor and might create circularity in the code. Since the add and
-remove methods are the ones that make sure there are no duplicate values in the set, the new table is created simply
-by iterating over the existing table and adding all the values to the hash set.
 
-* When creating a new hash table for the OpenHashSet, I decided to not initialize the table by
-creating element object in the entire array, but rather leave them as null and only create them when contains() is
-called (add and remove also call it). This should reduce unnecessary operations while relying on the hashcode premise
-of always returning the same hashcode for a given value.
+*  We chose to implement iterator() by first creating a linkedList which contains the values in the tree in ascending
+order. The AvlTree iterator is than the iterator of this linkedList. This utilizes the iterator implementation of
+a linked list without having to implement iterator methods ourselves. It also enables us to iterate over the tree as
+it was when the iterator was created, instead of its current state, as required according to answers in the forum.
 
-* The ClosedHashSet class uses a single helper function to run over the table for the purposes of adding, deleting,
-and indicating the existence of a value. This helper function, called getRelevantIndices(), takes a string value and
-returns both its index in the table, and the index of the first available cell that can the value can be mapped to.
-This way, we can run over the relevant parts of the table only once per call of add() delete() or contains(), instead
-of calling contains() (thus running over the table one extra time) when we want to add or delete.
-
-* When checking whether to increase/decrease capacity when adding/deleting, I add/subtract 1/capacity() to/from the
-current load factor, thus checking the expected load factor after the addition/deletion, adhering to the instruction
-to not let the load factor surpass the limit values even momentarily.
+*  In order to refrain from having to probe the tree twice in every add operation, we wrote a helper function that,
+when given a value, returns either a node with that value, or the parent node of that value were it added to the tree.
+We can then check if the value exists and get the node we should attach it to in one probing.
 
 =============================
-=   Answer to Questions     =
+=   Answers to Questions    =
 =============================
-
-Answer to performance questions:
-
-1.
-#These values correspond to the time it takes (in ms) to insert data1 to all data structures
-OpenHashSet_AddData1 = 94526
-ClosedHashSet_AddData1 = 205143
-TreeSet_AddData1 = 43 <-- Fastest
-LinkedList_AddData1 = 40007
-HashSet_AddData1 = 70
-
-2.
-#These values correspond to the time it takes (in ms) to insert data2 to all data structures
-OpenHashSet_AddData2 = 22
-ClosedHashSet_AddData2 = 34
-TreeSet_AddData2 = 51
-LinkedList_AddData2 = 36700
-HashSet_AddData2 = 8 <--- Fastest.
-
-3.
-In all data structures except the linked list took way less time to set up data2 than data1. This is because
-data1 contains values that are all hashed to the same value, and therefore for both open and closed, set, as well as
-Java's classes, extra operations are needed in order to add each value. OpenHashSet becomes de-facto a linked list,
-only that it rehashes unnecessarily on occasion, and ClosedHashSet goes through all the previous values in order to
-hash each new value, plus rehashes. The reason that linked list did not change its performance is that it goes through
-the entire list before each insertion either way.
-
-4.
-#These values correspond to the time it takes (in ns) to check if "hi" is contained in
-#the data structures initialized with data1
-OpenHashSet_Contains_hi1 = 101
-ClosedHashSet_Contains_hi1 = 157
-TreeSet_Contains_hi1 = 263
-LinkedList_Contains_hi1 = 890458
-HashSet_Contains_hi1 = 61 <-- Fastest
-
-5.
-#These values correspond to the time it takes (in ns) to check if "-13170890158" is contained in
-#the data structures initialized with data1
-OpenHashSet_Contains_negative = 1170464
-ClosedHashSet_Contains_negative = 2485857
-TreeSet_Contains_negative = 214
-LinkedList_Contains_negative = 1049149
-HashSet_Contains_negative = 55 <-- Fastest
-
-6.
-Both open and closed hash sets took more time to search the value that shares the hashcode with all the others
-contained in data1, but in both cases open performed better. This is obvious since Searching a value that does not
-share a hashcode takes very little time in both set types.
-The tree data structure searched for the value with the same hash comparably fast. This is because it does not use a
-hash scheme and can generally be searched quickly.
-The linked list took pretty much the same time in both cases, since it goes through the entire list either way.
-The Java HashSet probably uses a different hashing scheme, or handles the case of many values with the same hash in
-some other way, since it wasn't slowed down by abusing the hash scheme.
-
-7.
-#These values correspond to the time it takes (in ns) to check if "23" is contained in
-#the data structures initialized with data2
-OpenHashSet_Contains_23 = 57 <--- Fastest
-ClosedHashSet_Contains_23 = 74
-TreeSet_Contains_23 = 194
-LinkedList_Contains_23 = 296
-HashSet_Contains_23 = 80
-
-
-#These values correspond to the time it takes (in ns) to check if "hi" is contained in
-#the data structures initialized with data2
-OpenHashSet_Contains_hi2 = 27
-ClosedHashSet_Contains_hi2 = 92
-TreeSet_Contains_hi2 = 170
-LinkedList_Contains_hi2 = 792867
-HashSet_Contains_hi2 = 17 <--- Fastest
-
-With the more natural mixture of stings in data2, the open set performed better with a value that is not in the set,
-while closed performed better when the value was in the set. The only data structure that experienced significant
-difference is the linked list, which, when the value wasn't there, had to go through the entirety of the list in order
-to verify it.
-
-=============================
-=   Answer to Questions - Part 2
-=============================
-
-1. See File Description
-2. See "Design".
-3. See "Design".
-4. See last part.
-5. I compared performances with different warm up periods and stopped at 50k iterations because performances seemed
-to plateau.
-6.
-- Since the data1 set abuses the hashing scheme by making the implementation go over all the values, it de-facto
-reduces it to a list, only with extra operations between searches since it rehashes. Hence the bad performances.
-
-- Open performed better than Closed in general, and Java's hashing was way better than either, especially when the
-hashing scheme's limits were tested with dataset1. I would use hashing for all searching purposes.
-Linked list performed poorly, since its search is implemented in O(n). The only reason to not use hash is when the
-hashing function fails due to many values with the same hashcode.
-
-- I expected open to perform better in general since it handles clamping-overload similarly while not rehashing as
-often as the closed set. Either way, I was shocked by how much faster Java's HashSet was, and I guess it uses a more
-sophisticated heuristic to deal with hashing abuses such as data1.
-
 
 
 

@@ -2,6 +2,8 @@ package oop.ex4.data_structures;
 
 import org.junit.Test;
 
+import java.util.*;
+
 import static org.junit.Assert.*;
 
 public class AvlTreeTest {
@@ -158,5 +160,33 @@ public class AvlTreeTest {
         assertEquals(3, AvlTree.findMaxNodes(1));
         assertEquals(4, AvlTree.findMinNodes(2));
         assertEquals(7, AvlTree.findMaxNodes(2));
+    }
+
+    private void compareToRandomSet(int size) {
+        TreeSet<Integer> intSet = new TreeSet<>();
+        Random random = new Random();
+        for (int i=0; i < size; i++) {
+            intSet.add(random.nextInt());
+        }
+        int[] intArray = new int[intSet.size()];
+        int index = 0;
+        for (int value : intSet) {
+            intArray[index] = value;
+            index++;
+        }
+        AvlTree tree = new AvlTree(intArray);
+        Iterator<Integer> treeIterator = tree.iterator();
+        Iterator<Integer> setIterator = intSet.iterator();
+        while (treeIterator.hasNext() || setIterator.hasNext()) {
+            assertEquals(setIterator.next(), treeIterator.next());
+        }
+    }
+
+    @Test
+    public void testIterator() {
+        int SMALL_SET_SIZE = 5;
+        int LARGE_SET_SIZE = 100;
+        compareToRandomSet(SMALL_SET_SIZE);
+        compareToRandomSet(LARGE_SET_SIZE);
     }
 }

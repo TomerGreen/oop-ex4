@@ -46,9 +46,17 @@ public class Node {
     }
 
     public void setHeight(int newHeight){
-
         height = newHeight;
     }
+
+    /**
+     * Returns whether the node has a left son.
+     * @return Whether the node has a left son.
+     */
+    public boolean hasLeftSon() {
+        return leftSon != null;
+    }
+
     /**
      * A getter method for the node's left son.
      * @return the node's left son.
@@ -73,6 +81,14 @@ public class Node {
     public Node setLeftSon(Node node){
         leftSon = node;
         return leftSon;
+    }
+
+    /**
+     * Returns whether the node has a right son.
+     * @return Whether the node has a right son.
+     */
+    public boolean hasRightSon() {
+        return rightSon != null;
     }
 
     /**
@@ -101,6 +117,13 @@ public class Node {
         return rightSon;
     }
 
+    /**
+     * Returns whether the node has a parent.
+     * @return Whether the node has a parent.
+     */
+    public boolean hasFather() {
+        return father != null;
+    }
 
     /**
      * A getter method for the node's father.
@@ -128,6 +151,14 @@ public class Node {
     }
 
     /**
+     * @param other Another node.
+     * @return Whether the values of this and the other node are equal.
+     */
+    private boolean equals(Node other) {
+        return this.value == other.value;
+    }
+
+    /**
      * Returns the height difference between the two children of a node.
      * @return the height difference between the two children of a node.
      */
@@ -148,4 +179,55 @@ public class Node {
 //        System.out.println("Checking height diff for node " + this.getValue()  + " height diff is " +abs(rightSon.height- leftSon.height)  );
         return abs(rightSon.height- leftSon.height);
     }
+
+    /**
+     * Returns the node with the smallest value in the subtree of which
+     * this node is the root. Note that it might be this node itself, hence null
+     * should never be returned.
+     * @return The subtree minimal node.
+     */
+    public Node getSubtreeMinNode() {
+        Node minNode = this;
+        while (minNode.hasLeftSon()) {
+            minNode = minNode.leftSon;
+        }
+        return minNode;
+    }
+
+    /**
+     * Returns the ancestor of this node with minimal value that is
+     * bigger than that of this node. Note that this node cannot be returned.
+     * @return The ancestor that succeeds this node, or null if there is none.
+     */
+    private Node getAncestorSuccessor() {
+        Node succ = this;
+        while (succ.hasFather()) {
+            Node succParent = succ.father;
+            // If succ is the left son of the parent, the parent is the ancestor successor.
+            if (succParent.hasLeftSon() && succParent.leftSon.equals(succ)) {
+                return succParent;
+            }
+            else {
+                succ = succParent;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets the node in the tree with the smallest value that is bigger
+     * than that of the this node. Note that if this returns null than there
+     * is no successor in the tree.
+     * @return The successor node.
+     */
+    public Node getSuccessor() {
+        // If it has a right son, return the minimal node in its subtree.
+        if (this.hasRightSon()) {
+            return this.rightSon.getSubtreeMinNode();
+        }
+        else {
+            return this.getAncestorSuccessor();
+        }
+    }
+
 }

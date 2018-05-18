@@ -1,18 +1,19 @@
 package oop.ex4.data_structures;
 import java.math.*;
+import java.util.*;
 
 import static java.lang.Math.max;
 
 /**
  * A class representing an AVL tree.
  */
-public class AvlTree {
+public class AvlTree implements Iterable<Integer> {
 
     /* The number of nodes in the tree */
     private int size;
 
     /** The root node. */
-    protected Node root;
+    private Node root;
 
     /**
      * Creates an empty tree.
@@ -38,8 +39,9 @@ public class AvlTree {
      * @param tree The copied tree.
      */
     public AvlTree(AvlTree tree) {
-        size = 0;
+        size = tree.size();
         this.root = tree.root;
+        // I NEED TO FIX THIS!
     }
 
     /**
@@ -83,6 +85,9 @@ public class AvlTree {
      * false otherwise.
      */
     public boolean add(int newValue){
+        // ########################################### DEBUGGING ##########################################
+        System.out.println("Adding " + newValue);
+        // ########################################### DEBUGGING ##########################################
         Node father = expectedParent(newValue);
         if(father != null){
             Node newNode = new Node(father, newValue);
@@ -321,7 +326,7 @@ public class AvlTree {
             return true;
         }
 
-        Node successor = findSuccessor(deleteNode);
+        Node successor = deleteNode.getSuccessor();
         swap(deleteNode, successor);
         father = deleteNode.getFather();
         changeAncestorsChild(father, deleteNode, null);
@@ -359,13 +364,6 @@ public class AvlTree {
         node2RightSon.setFather(node1);
 
 
-    }
-
-    /*
-    Dummy method to be replaced by real implementation.
-     */
-    private Node findSuccessor(Node node){
-        return null;
     }
 
     /*
@@ -453,6 +451,29 @@ public class AvlTree {
             }
         }
         return currNode;
+    }
+
+    /**
+     * Returns an ordered list of the values in the tree.
+     * @return An ascending order integer list of values in the tree.
+     */
+    private LinkedList<Integer> getTreeList() {
+        LinkedList<Integer> list = new LinkedList<>();
+        Node currNode = root.getSubtreeMinNode();
+        while (currNode != null) {
+            list.add(currNode.getValue());
+            currNode = currNode.getSuccessor();
+        }
+        return list;
+    }
+
+    /**
+     * Returns an iterator for the AVL tree. The iterator
+     * @return
+     */
+    public Iterator<Integer> iterator() {
+        LinkedList<Integer> treeList = getTreeList();
+        return treeList.iterator();
     }
 
 }
