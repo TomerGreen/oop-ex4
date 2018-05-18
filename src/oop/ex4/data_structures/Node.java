@@ -22,7 +22,7 @@ public class Node {
         this.value = value;
         leftSon = null;
         rightSon = null;
-        height = 1;
+        height = 0;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Node {
         this.value = value;
         leftSon = null;
         rightSon = null;
-        height = 1;
+        height = 0;
     }
 
     /**
@@ -45,8 +45,9 @@ public class Node {
         return height;
     }
 
-    public void setHeight(int num){
-        height += num;
+    public void setHeight(int newHeight){
+
+        height = newHeight;
     }
     /**
      * A getter method for the node's left son.
@@ -131,15 +132,20 @@ public class Node {
      * @return the height difference between the two children of a node.
      */
     public int getHeightDiff(){
+
         if(leftSon == null && rightSon == null){
+//            System.out.println("Checking height diff for node " + this.getValue()  + "height diff is 0" );
             return 0;
         }
         else if(leftSon == null){
-            return rightSon.getHeight();
+//            System.out.println("Checking height diff for node " + this.getValue()  + " height diff is " +rightSon.getHeight()+1 );
+            return rightSon.getHeight()+1;
         }
         else if(rightSon == null){
-            return -leftSon.getHeight();
+//            System.out.println("Checking height diff for node " + this.getValue()  + " height diff is " + -(leftSon.getHeight()+1) );
+            return leftSon.getHeight()+1;
         }
+//        System.out.println("Checking height diff for node " + this.getValue()  + " height diff is " +abs(rightSon.height- leftSon.height)  );
         return abs(rightSon.height- leftSon.height);
     }
 }
