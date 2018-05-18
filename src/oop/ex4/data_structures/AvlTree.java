@@ -39,9 +39,10 @@ public class AvlTree implements Iterable<Integer> {
      * @param tree The copied tree.
      */
     public AvlTree(AvlTree tree) {
+        for (int value : tree) {
+            this.add(value);
+        }
         size = tree.size();
-        this.root = tree.root;
-        // I NEED TO FIX THIS!
     }
 
     /**
