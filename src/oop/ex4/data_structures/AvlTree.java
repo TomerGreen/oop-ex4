@@ -86,9 +86,6 @@ public class AvlTree implements Iterable<Integer> {
      * false otherwise.
      */
     public boolean add(int newValue){
-        // ########################################### DEBUGGING ##########################################
-        System.out.println("Adding " + newValue);
-        // ########################################### DEBUGGING ##########################################
         Node father = expectedParent(newValue);
         if(father != null){
             Node newNode = new Node(father, newValue);
