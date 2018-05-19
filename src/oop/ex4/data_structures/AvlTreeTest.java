@@ -232,14 +232,19 @@ public class AvlTreeTest {
         return new AvlTree(intArray);
     }
 
-    private void compareToRandomSet(int size) {
-        TreeSet<Integer> intSet = getRandomSet(size);
+    private int[] getArrayFromSet(TreeSet<Integer> intSet) {
         int[] intArray = new int[intSet.size()];
         int index = 0;
         for (int value : intSet) {
             intArray[index] = value;
             index++;
         }
+        return intArray;
+    }
+
+    private void compareToRandomSet(int size) {
+        TreeSet<Integer> intSet = getRandomSet(size);
+        int[] intArray = getArrayFromSet(intSet);
         AvlTree tree = new AvlTree(intArray);
         Iterator<Integer> treeIterator = tree.iterator();
         Iterator<Integer> setIterator = intSet.iterator();
@@ -258,12 +263,34 @@ public class AvlTreeTest {
 
     @Test
     public void testCopyConstructor() {
-        AvlTree original = getRandomTree(200);
+        AvlTree original = getRandomTree(1000);
         AvlTree copy = new AvlTree(original);
         Iterator<Integer> originalIterator = original.iterator();
         Iterator<Integer> copyIterator = copy.iterator();
         while (originalIterator.hasNext() || copyIterator.hasNext()) {
             assertEquals(originalIterator.next(), copyIterator.next());
+        }
+    }
+
+    @Test
+    public void testArrayConstructor() {
+        int[] orderedArray = getArrayFromSet(getRandomSet(1000));
+        ArrayList<Integer> intList = new ArrayList<>();
+        for (int value : orderedArray) {
+            intList.add(value);
+        }
+        Collections.shuffle(intList);
+        int[] shuffledArray = new int[intList.size()];
+        int index = 0;
+        for (int value : intList) {
+            shuffledArray[index] = value;
+            index++;
+        }
+        AvlTree tree = new AvlTree(shuffledArray);
+        Iterator<Integer> treeIterator = tree.iterator();
+        assertEquals(orderedArray.length, tree.size());
+        for (int i=0; i < orderedArray.length; i++) {
+            assertEquals(orderedArray[i], (int)treeIterator.next());
         }
     }
 }

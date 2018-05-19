@@ -120,6 +120,7 @@ public class Tester_oop_ex4 {
 		for (int i = 0; i <= size; i++) {
 			int x = random.nextInt(size);
 			boolean b = set.remove(x);
+			System.out.println("Trying deletion " + i + "/" + size);
 			assertEquals("problem with deletion of " + x, b, tree.delete(x));
 			assertEquals("problem with deletion of " + x, b, secondTree.delete(x));
 
