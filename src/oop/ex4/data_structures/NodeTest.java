@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class NodeTest {
-
+/*
     @org.junit.Test
     public void createNode(){
         Node root = new Node(2);
@@ -19,5 +19,5 @@ public class NodeTest {
 
 
     }
-
+*/
 }

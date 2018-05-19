@@ -155,6 +155,7 @@ public class AvlTreeTest {
     @Test
     public void testDelete(){
         AvlTree tree = new AvlTree(INITIAL_ITEMS);
+        assertEquals("Wrong size", 8, tree.size());
         assertEquals("Wrong height", 0, tree.contains(1) );
         assertEquals("Wrong height", 1, tree.contains(5) );
         assertEquals("Wrong height", 0, tree.contains(10) );
@@ -164,16 +165,20 @@ public class AvlTreeTest {
         assertEquals("Wrong root", 7, tree.getRoot().getValue());
         assertFalse("Deleted non-existent item", tree.delete(20));
         assertTrue("Unable to delete existent item", tree.delete(1));
+        assertEquals("Wrong size", 7, tree.size());
         assertFalse("Deleted non-existent item", tree.delete(1));
         assertEquals("Contains non-existent item", -1, tree.contains(1));
         assertTrue("Unable to insert item", tree.add(1));
         assertEquals("Wrong place", 1, tree.getRoot().getLeftSon().getLeftSon().getValue());
         assertTrue("Unable to delete existent item", tree.delete(9));
+        assertEquals("Wrong size", 7, tree.size());
         assertEquals("Wrong root", 7, tree.getRoot().getValue());
         assertEquals("Wrong place", 10, tree.getRoot().getRightSon().getValue());
         assertTrue("Unable to insert item", tree.add(9));
+        assertEquals("Wrong size", 8, tree.size());
         assertEquals("Wrong place", 9, tree.getRoot().getRightSon().getLeftSon().getValue());
         assertTrue("Unable to delete existent item", tree.delete(3));
+        assertEquals("Wrong size", 7, tree.size());
         assertEquals("Wrong place", 4, tree.getRoot().getLeftSon().getValue());
         assertEquals("Wrong place", 1, tree.getRoot().getLeftSon().getLeftSon().getValue());
         assertEquals("Wrong place", 5, tree.getRoot().getLeftSon().getRightSon().getValue());
