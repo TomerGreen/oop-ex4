@@ -7,6 +7,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class AvlTreeTest {
+    final static int[] INITIAL_ITEMS = {1,3,5, 7, 9, 10, 4, 6};
 
     @Test
     public void testSimpleOperations() {
@@ -150,6 +151,37 @@ public class AvlTreeTest {
         assertEquals("Wrong height", tree.contains(10), 0);
         assertEquals("Wrong height", tree.contains(17), 0);
     }
+
+    @Test
+    public void testDelete(){
+        AvlTree tree = new AvlTree(INITIAL_ITEMS);
+        assertEquals("Wrong height", 0, tree.contains(1) );
+        assertEquals("Wrong height", 1, tree.contains(5) );
+        assertEquals("Wrong height", 0, tree.contains(10) );
+        assertEquals("Wrong height", 2 , tree.contains(3));
+        assertEquals("Wrong height", 1, tree.contains(9));
+        assertEquals("Wrong height", 3, tree.contains(7));
+        assertEquals("Wrong root", 7, tree.getRoot().getValue());
+        assertFalse("Deleted non-existent item", tree.delete(20));
+        assertTrue("Unable to delete existent item", tree.delete(1));
+        assertFalse("Deleted non-existent item", tree.delete(1));
+        assertEquals("Contains non-existent item", -1, tree.contains(1));
+        assertTrue("Unable to insert item", tree.add(1));
+        assertEquals("Wrong place", 1, tree.getRoot().getLeftSon().getLeftSon().getValue());
+        assertTrue("Unable to delete existent item", tree.delete(9));
+        assertEquals("Wrong root", 7, tree.getRoot().getValue());
+        assertEquals("Wrong place", 10, tree.getRoot().getRightSon().getValue());
+        assertTrue("Unable to insert item", tree.add(9));
+        assertEquals("Wrong place", 9, tree.getRoot().getRightSon().getLeftSon().getValue());
+        assertTrue("Unable to delete existent item", tree.delete(3));
+        assertEquals("Wrong place", 4, tree.getRoot().getLeftSon().getValue());
+        assertEquals("Wrong place", 1, tree.getRoot().getLeftSon().getLeftSon().getValue());
+        assertEquals("Wrong place", 5, tree.getRoot().getLeftSon().getRightSon().getValue());
+        assertEquals("Wrong place", 6, tree.getRoot().getLeftSon().getRightSon().getRightSon().getValue());
+        assertEquals("Wrong place", null, tree.getRoot().getLeftSon().getRightSon().getLeftSon());
+    }
+
+
 
     @Test
     public void testFindMinAndMaxNodes() {
