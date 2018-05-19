@@ -1,13 +1,13 @@
 package oop.ex4.data_structures;
 
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class NodeTest {
 
-    @Test
+    @org.junit.Test
     public void createNode(){
         Node root = new Node(2);
         Node leaf = new Node(root, 9);

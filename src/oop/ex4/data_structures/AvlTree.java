@@ -113,13 +113,15 @@ public class AvlTree implements Iterable<Integer> {
     Updates the heights of a node according to its children's heights.
      */
     private void fixHeight(Node node){
-        if (node.getRightSon() == null){
+        if (isLeaf(node)){
+            node.setHeight(0);
+        }
+        else if (node.getRightSon() == null){
             node.setHeight(node.getLeftSon().getHeight()+1);
         }
         else if (node.getLeftSon() == null){
             node.setHeight(node.getRightSon().getHeight()+1);
         }
-
         else {
             node.setHeight(max(node.getLeftSon().getHeight(), node.getRightSon().getHeight()) + 1);
         }
@@ -310,62 +312,96 @@ public class AvlTree implements Iterable<Integer> {
             return false; //value is not in the tree
         }
         Node father = deleteNode.getFather();
-        if (isLeaf(deleteNode)) {
+        if (isLeaf(deleteNode)) {   //Checks if toDelete is a leaf.
             changeAncestorsChild(father, deleteNode, null);
             deleteNode = null;
             return true;
         }
 
-        Node child = singleChilded(deleteNode);
-        if (child != null){
-            child.setFather(father);
-            changeAncestorsChild(father, deleteNode, child);
+        Node singleChild = singleChilded(deleteNode);
+        if (singleChild != null){   //Checks if toDelete has only one chlid.
+            singleChild.setFather(father);
+            changeAncestorsChild(father, deleteNode, singleChild);
             deleteNode = null;
             return true;
         }
 
         Node successor = deleteNode.getSuccessor();
+//        System.out.println("My successor is " + successor.getValue());
+//        System.out.println("His father is " + successor.getFather().getValue());
+//        System.out.println("Right child is " + successor.getRightSon());
+//        System.out.println("Left child is " + successor.getLeftSon());
         swap(deleteNode, successor);
+//        System.out.println("Now toDelete is " + deleteNode.getValue());
+//        System.out.println("His father is  " + deleteNode.getFather().getValue());
+//        System.out.println("Now toDelete is " + deleteNode.getValue());
         father = deleteNode.getFather();
         changeAncestorsChild(father, deleteNode, null);
+        deleteNode = null;
         fixHeight(father);
-        Node curNode = fixTree(father);
+        Node curNode = fixTree(father); //Re-balancing the tree.
         while (curNode != null) {
             curNode = fixTree(curNode);
         }
         return true;
     }
 
+
     /*
-    Swaps two nodes and adjusts their pointers.
+    Checks if two nodes are part of the same nuclear family.
      */
-    private void swap(Node node1, Node node2){
-        Node node1Father = node1.getFather();
-        Node node1RightSon = node1.getRightSon();
-        Node node1LeftSon = node1.getLeftSon();
-        Node node2Father = node2.getFather();
-        Node node2RightSon = node2.getRightSon();
-        Node node2LeftSon = node2.getLeftSon();
-
-        node2.setFather(node1Father);
-        changeAncestorsChild(node1Father, node1, node2);
-        node2.setLeftSon(node1LeftSon);
-        node1LeftSon.setFather(node2);
-        node2.setRightSon(node1RightSon);
-        node1RightSon.setFather(node2);
-
-        node1.setFather(node2Father);
-        changeAncestorsChild(node2Father, node2, node1);
-        node1.setLeftSon(node2LeftSon);
-        node2LeftSon.setFather(node1);
-        node1.setRightSon(node2RightSon);
-        node2RightSon.setFather(node1);
-
-
+    private boolean sameFamily(Node node1, Node node2){
+        return node1 == node2.getFather() || node2 == node1.getFather();
     }
 
     /*
-    Changes the old son of an ancestor with a new son
+    Swaps two nodes and adjusts their pointers.
+     */
+    private void swap(Node deleteNode, Node successor){
+        Node deleteFather = deleteNode.getFather();
+        Node deleteRightSon = deleteNode.getRightSon();
+        Node deleteLeftSon = deleteNode.getLeftSon();
+        Node successorFather = successor.getFather();
+        if (sameFamily(deleteNode, successor)){
+//            System.out.println("Same Family!");
+            Node father = deleteNode;
+            Node grandfather =father.getFather();
+            Node child = successor;
+//            System.out.println("father is " +father.getValue());
+//            System.out.println("child is " +child.getValue());
+            child.setFather(father.getFather());
+            changeAncestorsChild(grandfather, father, child);
+            if (child == father.getRightSon()) {
+                father.getLeftSon().setFather(child);
+                child.setLeftSon(father.getLeftSon());
+                child.setRightSon(father);
+            }
+            else {
+                father.getRightSon().setFather(child);
+                child.setRightSon(father.getRightSon());
+                child.setLeftSon(father);
+            }
+            father.setFather(child);
+            father.setRightSon(child.getRightSon());
+            father.setLeftSon(child.getLeftSon());
+            return;
+            }
+        successor.setFather(deleteFather);
+        changeAncestorsChild(deleteFather, deleteNode, successor);
+        successor.setLeftSon(deleteLeftSon);
+        successor.setRightSon(deleteRightSon);
+        deleteLeftSon.setFather(successor);
+        deleteRightSon.setFather(successor);
+        deleteNode.setFather(successorFather);
+        changeAncestorsChild(successorFather, successor, deleteNode);
+        deleteNode.setLeftSon(null);
+        deleteNode.setRightSon(null);
+    }
+
+
+
+    /*
+    Changes the old son of an ancestor with a new son.
      */
     private void changeAncestorsChild(Node father, Node oldSon, Node newSon){
         if (father.getLeftSon() == oldSon){
@@ -380,7 +416,7 @@ public class AvlTree implements Iterable<Integer> {
     Checks if a node is a leaf.
      */
     private boolean isLeaf(Node node){
-        return node.getHeight() == 0;
+        return node.getRightSon() == null && node.getLeftSon() == null;
     }
 
     /*
