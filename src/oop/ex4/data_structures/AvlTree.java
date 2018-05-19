@@ -64,11 +64,18 @@ public class AvlTree implements Iterable<Integer> {
 
     /**
      * Returns the minimum number of nodes in an AVL tree of a given height.
+     * A minimal tree of height h has a root, a subtree of height h-1 and a subtree of height h-2.
      * @param h An AVL tree height
      * @return The minimum number of nodes in a tree of that height.
      */
     public static int findMinNodes(int h) {
-        return findMaxNodes(h-1) + 1;
+        if (h < 0) {
+            return 0;
+        }
+        if (h == 0) {
+            return 1;
+        }
+        return 1 + findMinNodes(h-1) + findMinNodes(h-2);
     }
 
     /**

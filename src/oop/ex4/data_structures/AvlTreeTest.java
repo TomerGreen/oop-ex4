@@ -155,11 +155,20 @@ public class AvlTreeTest {
     public void testFindMinAndMaxNodes() {
         System.out.println(AvlTree.findMinNodes(0));
         assertEquals(1, AvlTree.findMinNodes(0));
-        assertEquals(1, AvlTree.findMaxNodes(0));
         assertEquals(2, AvlTree.findMinNodes(1));
-        assertEquals(3, AvlTree.findMaxNodes(1));
         assertEquals(4, AvlTree.findMinNodes(2));
+        assertEquals(7, AvlTree.findMinNodes(3));
+        assertEquals(54, AvlTree.findMinNodes(7));
+        assertEquals(4180, AvlTree.findMinNodes(16));
+        assertEquals(317810, AvlTree.findMinNodes(25));
+        assertEquals(433494436, AvlTree.findMinNodes(40));
+        assertEquals(1, AvlTree.findMaxNodes(0));
+        assertEquals(3, AvlTree.findMaxNodes(1));
         assertEquals(7, AvlTree.findMaxNodes(2));
+        assertEquals(15, AvlTree.findMaxNodes(3));
+        assertEquals(255, AvlTree.findMaxNodes(7));
+        assertEquals(131071, AvlTree.findMaxNodes(16));
+        assertEquals(67108863, AvlTree.findMaxNodes(25));
     }
 
     private void compareToRandomSet(int size) {
