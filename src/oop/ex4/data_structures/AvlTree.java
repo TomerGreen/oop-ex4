@@ -2,6 +2,7 @@ package oop.ex4.data_structures;
 import java.math.*;
 import java.util.*;
 
+import static java.lang.Math.abs;
 import static java.lang.Math.max;
 
 /**
@@ -14,6 +15,126 @@ public class AvlTree implements Iterable<Integer> {
 
     /** The root node. */
     private Node root;
+
+    /* ================================= SUB-CLASSES ================================= */
+
+    /**
+     * This class represents a node in an AVL tree.
+     */
+    public class Node {
+        /*The height and the numeric value of the node.*/
+        private int height, value;
+        /*The node's pointers to its father, left son and right son. */
+        private Node rightSon, leftSon, father;
+
+
+        /**
+         * An Empty constructor of Node.
+         */
+        Node(int value){
+            this.father = null;
+            this.value = value;
+            leftSon = null;
+            rightSon = null;
+            height = 0;
+        }
+
+        /**
+         * A constructor of Node.
+         * @param father The node's father.
+         */
+        Node(Node father, int value){
+            this.father = father;
+            this.value = value;
+            leftSon = null;
+            rightSon = null;
+            height = 0;
+        }
+
+        /**
+         * @param other Another node.
+         * @return Whether the values of this and the other node are equal.
+         */
+        private boolean equals(Node other) {
+            return this.value == other.value;
+        }
+
+        /**
+         * Returns the height difference between the two children of a node.
+         * @return the height difference between the two children of a node.
+         */
+        private int getHeightDiff(){
+
+            if(leftSon == null && rightSon == null){
+//            System.out.println("Checking height diff for node " + this.value  + "height diff is 0" );
+                return 0;
+            }
+            else if(leftSon == null){
+//            System.out.println("Checking height diff for node " + this.value  + " height diff is " +rightSon.height+1 );
+                return rightSon.height+1;
+            }
+            else if(rightSon == null){
+//            System.out.println("Checking height diff for node " + this.value  + " height diff is " + -(leftSon.height+1) );
+                return leftSon.height+1;
+            }
+//        System.out.println("Checking height diff for node " + this.value  + " height diff is " +abs(rightSon.height- leftSon.height)  );
+            return abs(rightSon.height- leftSon.height);
+        }
+
+        /**
+         * Returns the node with the smallest value in the subtree of which
+         * this node is the root. Note that it might be this node itself, hence null
+         * should never be returned.
+         * @return The subtree minimal node.
+         */
+        private Node getSubtreeMinNode() {
+            Node minNode = this;
+            while (minNode.leftSon != null) {
+                minNode = minNode.leftSon;
+            }
+            return minNode;
+        }
+
+        /**
+         * Returns the ancestor of this node with minimal value that is
+         * bigger than that of this node. Note that this node cannot be returned.
+         * @return The ancestor that succeeds this node, or null if there is none.
+         */
+        private Node getAncestorSuccessor() {
+            Node succ = this;
+            while (succ.father != null) {
+                Node succParent = succ.father;
+                // If succ is the left son of the parent, the parent is the ancestor successor.
+                if (succParent.leftSon != null && succParent.leftSon.equals(succ)) {
+                    return succParent;
+                }
+                else {
+                    succ = succParent;
+                }
+            }
+            return null;
+        }
+
+        /**
+         * Gets the node in the tree with the smallest value that is bigger
+         * than that of the this node. Note that if this returns null than there
+         * is no successor in the tree.
+         * @return The successor node.
+         */
+        private Node getSuccessor() {
+            // If it has a right son, return the minimal node in its subtree.
+            if (this.rightSon != null) {
+                return this.rightSon.getSubtreeMinNode();
+            }
+            else {
+                return this.getAncestorSuccessor();
+            }
+        }
+
+    }
+
+    /* ================================= END SUB-CLASSES ================================= */
+
 
     /**
      * Creates an empty tree.
@@ -89,15 +210,15 @@ public class AvlTree implements Iterable<Integer> {
         Node father = expectedParent(newValue);
         if(father != null){
             Node newNode = new Node(father, newValue);
-            if (newValue > father.getValue()){
-                father.setRightSon(newNode);
+            if (newValue > father.value){
+                father.rightSon = newNode;
             }
             else{
-                father.setLeftSon(newNode);
+                father.leftSon = newNode;
             }
-//            System.out.println("Added node with value " + newValue + " before fixTree, father is " + newNode.getFather().getValue());
+//            System.out.println("Added node with value " + newValue + " before fixTree, father is " + newNode.father.value);
             fixTree(newNode);
-//            System.out.println("Added node with value " + newValue + " after, father is " + newNode.getFather().getValue());
+//            System.out.println("Added node with value " + newValue + " after, father is " + newNode.father.value);
             size++;
             return true;
         }
@@ -113,15 +234,15 @@ public class AvlTree implements Iterable<Integer> {
     Updates the heights of a node according to its children's heights.
      */
     private void fixHeight(Node node){
-        if (node.getRightSon() == null){
-            node.setHeight(node.getLeftSon().getHeight()+1);
+        if (node.rightSon != null){
+            node.height = (node.leftSon.height+1);
         }
-        else if (node.getLeftSon() == null){
-            node.setHeight(node.getRightSon().getHeight()+1);
+        else if (node.leftSon != null){
+            node.height = node.rightSon.height+1;
         }
 
         else {
-            node.setHeight(max(node.getLeftSon().getHeight(), node.getRightSon().getHeight()) + 1);
+            node.height = max(node.leftSon.height, node.rightSon.height) + 1;
         }
 
     }
@@ -132,13 +253,13 @@ public class AvlTree implements Iterable<Integer> {
      */
     private Node fixTree(Node newNode){
         Node grandchild = newNode;
-        Node child = newNode.getFather();
-        Node father= child.getFather();
+        Node child = newNode.father;
+        Node father= child.father;
         fixHeight(child);
         if (father == null){
             return null;
         }
-        while (father.getFather() != null){
+        while (father.father != null){
             fixHeight(father);
             if (checkViolations(father, child, grandchild)){
 //                System.out.println("exiting check violations..");
@@ -146,7 +267,7 @@ public class AvlTree implements Iterable<Integer> {
             }
             grandchild = child;
             child = father;
-            father = father.getFather();
+            father = father.father;
 
         }
         fixHeight(father);
@@ -164,12 +285,12 @@ public class AvlTree implements Iterable<Integer> {
         if (node == null){
             return true;
         }
-//        System.out.println("checking node with value " + node.getValue());
-        if (node.getLeftSon() != null || node.getRightSon() != null){
+//        System.out.println("checking node with value " + node.value);
+        if (node.leftSon != null || node.rightSon != null){
             if (node.getHeightDiff() > 1){
                 return false;
             }
-           return isAVLOkay(node.getLeftSon()) && isAVLOkay(node.getRightSon());
+           return isAVLOkay(node.leftSon) && isAVLOkay(node.rightSon);
 
         }
         return true;
@@ -188,17 +309,17 @@ public class AvlTree implements Iterable<Integer> {
      */
     private boolean checkViolations(Node father, Node child, Node grandchild){
         if (father.getHeightDiff() > 1){
-//            System.out.println("For the node " + father.getValue() + " a violation was found.");
-            if(child == father.getRightSon() &&  grandchild == child.getRightSon()){
+//            System.out.println("For the node " + father.value + " a violation was found.");
+            if(child == father.rightSon &&  grandchild == child.rightSon){
                 fixRRViolation(father, child);
             }
-            else if (child == father.getRightSon() && grandchild == child.getLeftSon()){
+            else if (child == father.rightSon && grandchild == child.leftSon){
                 fixRLViolation(father, child, grandchild);
             }
-            else if (child == father.getLeftSon() && grandchild == child.getRightSon()){
+            else if (child == father.leftSon && grandchild == child.rightSon){
                 fixLRViolation(father, child, grandchild);
             }
-            else if (child == father.getLeftSon() && grandchild == child.getLeftSon()){
+            else if (child == father.leftSon && grandchild == child.leftSon){
                 fixLLViolation(father, child);
             }
 //            System.out.println("Leaving checkViolations");
@@ -212,25 +333,25 @@ public class AvlTree implements Iterable<Integer> {
      */
     private void fixRRViolation(Node father, Node child){
 //        System.out.println("fixing RR");
-        Node grandfather = father.getFather();
-        Node orphanNode = child.getLeftSon();
-        child.setLeftSon(father);
-        father.setFather(child);
-        father.setHeight(father.getHeight()-2);
+        Node grandfather = father.father;
+        Node orphanNode = child.leftSon;
+        child.leftSon = father;
+        father.father = child;
+        father.height = father.height-2;
         if (grandfather != null) {
             changeAncestorsChild(grandfather, father, child);
-            child.setFather(grandfather);
+            child.father = grandfather;
         }
         else{
-            child.setFather(null);
-//            System.out.println("Setting new root as " + child.getValue());
+            child.father = null;
+//            System.out.println("Setting new root as " + child.value);
             root = child;
         }
-        father.setRightSon(orphanNode);
+        father.rightSon = orphanNode;
 //        System.out.println("father has right son");
         if (orphanNode != null) {
 //            System.out.println("Orphan isn't null");
-            orphanNode.setFather(father);
+            orphanNode.father = father;
         }
 //        System.out.println("leaving RR");
     }
@@ -240,17 +361,17 @@ public class AvlTree implements Iterable<Integer> {
      */
     private void fixRLViolation(Node father, Node child, Node grandchild){
 //        System.out.println("fixing RL");
-        Node orphanChild = grandchild.getRightSon();
-        father.setRightSon(grandchild);
-        grandchild.setFather(father);
-        grandchild.setRightSon(child);
-        child.setFather(grandchild);
-        child.setLeftSon(orphanChild);
+        Node orphanChild = grandchild.rightSon;
+        father.rightSon = grandchild;
+        grandchild.father = father;
+        grandchild.rightSon = child;
+        child.father = grandchild;
+        child.leftSon = orphanChild;
         if (orphanChild != null) {
-            orphanChild.setFather(child);
+            orphanChild.father = child;
         }
-        child.setHeight(child.getHeight()-1);
-        grandchild.setHeight(grandchild.getHeight()+1);
+        child.height = child.height-1;
+        grandchild.height = grandchild.height+1;
         fixRRViolation(father, grandchild);
 //        System.out.println("Leaving RL");
     }
@@ -260,17 +381,17 @@ public class AvlTree implements Iterable<Integer> {
      */
     private void fixLRViolation(Node father, Node child, Node grandchild){
 //        System.out.println("fixing LR");
-        Node orphanChild = grandchild.getLeftSon();
-        father.setLeftSon(grandchild);
-        grandchild.setFather(father);
-        grandchild.setLeftSon(child);
-        child.setFather(grandchild);
-        child.setRightSon(orphanChild);
+        Node orphanChild = grandchild.leftSon;
+        father.leftSon = grandchild;
+        grandchild.father = father;
+        grandchild.leftSon = child;
+        child.father = grandchild;
+        child.rightSon = orphanChild;
         if (orphanChild != null) {
-            orphanChild.setFather(child);
+            orphanChild.father = child;
         }
-        child.setHeight(child.getHeight()-1);
-        grandchild.setHeight(grandchild.getHeight()+1);
+        child.height = child.height-1;
+        grandchild.height = grandchild.height+1;
         fixLLViolation(father, grandchild);
     }
 
@@ -279,23 +400,23 @@ public class AvlTree implements Iterable<Integer> {
      */
     private void fixLLViolation(Node father, Node child){
 //        System.out.println("fixing LL");
-        Node grandfather = father.getFather();
-        Node orphanNode = child.getRightSon();
-        child.setRightSon(father);
-        father.setFather(child);
-        father.setHeight(father.getHeight()-2);
+        Node grandfather = father.father;
+        Node orphanNode = child.rightSon;
+        child.rightSon = father;
+        father.father = child;
+        father.height = father.height-2;
         if (grandfather != null){
             changeAncestorsChild(grandfather, father, child);
-            child.setFather(grandfather);
+            child.father = grandfather;
         }
         else{
-            child.setFather(null);
-//            System.out.println("Setting new root as " + child.getValue());
+            child.father = null;
+//            System.out.println("Setting new root as " + child.value);
             root = child;
         }
-        father.setLeftSon(orphanNode);
+        father.leftSon = orphanNode;
         if (orphanNode != null) {
-            orphanNode.setFather(father);
+            orphanNode.father = father;
         }
     }
 
@@ -306,10 +427,10 @@ public class AvlTree implements Iterable<Integer> {
      */
     public boolean delete(int toDelete){
         Node deleteNode = valueToNode(toDelete);
-        if (deleteNode.getValue() != toDelete){
+        if (deleteNode.value != toDelete){
             return false; //value is not in the tree
         }
-        Node father = deleteNode.getFather();
+        Node father = deleteNode.father;
         if (isLeaf(deleteNode)) {
             changeAncestorsChild(father, deleteNode, null);
             deleteNode = null;
@@ -318,7 +439,7 @@ public class AvlTree implements Iterable<Integer> {
 
         Node child = singleChilded(deleteNode);
         if (child != null){
-            child.setFather(father);
+            child.father = father;
             changeAncestorsChild(father, deleteNode, child);
             deleteNode = null;
             return true;
@@ -326,7 +447,7 @@ public class AvlTree implements Iterable<Integer> {
 
         Node successor = deleteNode.getSuccessor();
         swap(deleteNode, successor);
-        father = deleteNode.getFather();
+        father = deleteNode.father;
         changeAncestorsChild(father, deleteNode, null);
         fixHeight(father);
         Node curNode = fixTree(father);
@@ -340,26 +461,26 @@ public class AvlTree implements Iterable<Integer> {
     Swaps two nodes and adjusts their pointers.
      */
     private void swap(Node node1, Node node2){
-        Node node1Father = node1.getFather();
-        Node node1RightSon = node1.getRightSon();
-        Node node1LeftSon = node1.getLeftSon();
-        Node node2Father = node2.getFather();
-        Node node2RightSon = node2.getRightSon();
-        Node node2LeftSon = node2.getLeftSon();
+        Node node1Father = node1.father;
+        Node node1RightSon = node1.rightSon;
+        Node node1LeftSon = node1.leftSon;
+        Node node2Father = node2.father;
+        Node node2RightSon = node2.rightSon;
+        Node node2LeftSon = node2.leftSon;
 
-        node2.setFather(node1Father);
+        node2.father = node1Father;
         changeAncestorsChild(node1Father, node1, node2);
-        node2.setLeftSon(node1LeftSon);
-        node1LeftSon.setFather(node2);
-        node2.setRightSon(node1RightSon);
-        node1RightSon.setFather(node2);
+        node2.leftSon = node1LeftSon;
+        node1LeftSon.father = node2;
+        node2.rightSon = node1RightSon;
+        node1RightSon.father = node2;
 
-        node1.setFather(node2Father);
+        node1.father = node2Father;
         changeAncestorsChild(node2Father, node2, node1);
-        node1.setLeftSon(node2LeftSon);
-        node2LeftSon.setFather(node1);
-        node1.setRightSon(node2RightSon);
-        node2RightSon.setFather(node1);
+        node1.leftSon = node2LeftSon;
+        node2LeftSon.father = node1;
+        node1.rightSon = node2RightSon;
+        node2RightSon.father = node1;
 
 
     }
@@ -368,11 +489,11 @@ public class AvlTree implements Iterable<Integer> {
     Changes the old son of an ancestor with a new son
      */
     private void changeAncestorsChild(Node father, Node oldSon, Node newSon){
-        if (father.getLeftSon() == oldSon){
-            father.setLeftSon(newSon);
+        if (father.leftSon == oldSon){
+            father.leftSon = newSon;
         }
-        else if (father.getRightSon() == oldSon){
-            father.setRightSon(newSon);
+        else if (father.rightSon == oldSon){
+            father.rightSon = newSon;
         }
     }
 
@@ -380,7 +501,7 @@ public class AvlTree implements Iterable<Integer> {
     Checks if a node is a leaf.
      */
     private boolean isLeaf(Node node){
-        return node.getHeight() == 0;
+        return node.height == 0;
     }
 
     /*
@@ -388,11 +509,11 @@ public class AvlTree implements Iterable<Integer> {
     Returns the single child.
      */
     private Node singleChilded(Node node){
-        if(node.getLeftSon() != null && node.getRightSon() == null){
-            return node.getLeftSon();
+        if(node.leftSon != null && node.rightSon == null){
+            return node.leftSon;
         }
-        if (node.getLeftSon() == null && node.getRightSon() != null){
-            return node.getRightSon();
+        if (node.leftSon == null && node.rightSon != null){
+            return node.rightSon;
         }
         return null;
     }
@@ -404,11 +525,11 @@ public class AvlTree implements Iterable<Integer> {
      */
     public int contains(int searchVal){
         Node candidate = valueToNode(searchVal);
-        if (candidate == null || candidate.getValue() != searchVal) {
+        if (candidate == null || candidate.value != searchVal) {
             return -1;
         }
         else {
-            return candidate.getHeight();
+            return candidate.height;
         }
     }
 
@@ -419,7 +540,7 @@ public class AvlTree implements Iterable<Integer> {
      */
     private Node expectedParent(int searchVal) {
         Node candidate = valueToNode(searchVal);
-        if (candidate == null || searchVal == candidate.getValue()) {
+        if (candidate == null || searchVal == candidate.value) {
             return null;
         }
         return candidate;
@@ -438,14 +559,14 @@ public class AvlTree implements Iterable<Integer> {
         Node nextNode = root;  // The node we proceed to, or stop if it's null.
         while (nextNode != null) {
             currNode = nextNode;
-            if (searchVal == currNode.getValue()) {
+            if (searchVal == currNode.value) {
                 return currNode;
             }
-            else if (searchVal > currNode.getValue()) {
-                nextNode = currNode.getRightSon();
+            else if (searchVal > currNode.value) {
+                nextNode = currNode.rightSon;
             }
             else {
-                nextNode = currNode.getLeftSon();
+                nextNode = currNode.leftSon;
             }
         }
         return currNode;
@@ -459,7 +580,7 @@ public class AvlTree implements Iterable<Integer> {
         LinkedList<Integer> list = new LinkedList<>();
         Node currNode = root.getSubtreeMinNode();
         while (currNode != null) {
-            list.add(currNode.getValue());
+            list.add(currNode.value);
             currNode = currNode.getSuccessor();
         }
         return list;
