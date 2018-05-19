@@ -8,13 +8,7 @@ import static java.lang.Math.max;
 /**
  * A class representing an AVL tree.
  */
-public class AvlTree implements Iterable<Integer> {
-
-    /* The number of nodes in the tree */
-    private int size;
-
-    /** The root node. */
-    private Node root;
+public class AvlTree extends BinarySearchTree {
 
     /* ================================= SUB-CLASSES ================================= */
 
@@ -185,27 +179,20 @@ public class AvlTree implements Iterable<Integer> {
 
     /**
      * Returns the minimum number of nodes in an AVL tree of a given height.
+     * A minimal tree of height h has a root, a subtree of height h-1 and a subtree of height h-2.
      * @param h An AVL tree height
      * @return The minimum number of nodes in a tree of that height.
      */
     public static int findMinNodes(int h) {
-        return findMaxNodes(h-1) + 1;
+        if (h < 0) {
+            return 0;
+        }
+        if (h == 0) {
+            return 1;
+        }
+        return 1 + findMinNodes(h-1) + findMinNodes(h-2);
     }
 
-    /**
-     * returns the number of nodes in the tree.
-     * @return The nunmber of nodes in the tree.
-     */
-    public int size(){
-        return size;
-    }
-
-    /**
-     * Add a new node with the given key to the tree.
-     * @param newValue the value of the new node to add.
-     * @return true if the value to add is not already in the tree and it was successfully added,
-     * false otherwise.
-     */
     public boolean add(int newValue){
         Node father = expectedParent(newValue);
         if(father != null){
@@ -234,13 +221,15 @@ public class AvlTree implements Iterable<Integer> {
     Updates the heights of a node according to its children's heights.
      */
     private void fixHeight(Node node){
-        if (node.rightSon != null){
-            node.height = (node.leftSon.height+1);
+        if (isLeaf(node)){
+            node.setHeight(0);
+        }
+        else if (node.getRightSon() == null){
+            node.setHeight(node.getLeftSon().getHeight()+1);
         }
         else if (node.leftSon != null){
             node.height = node.rightSon.height+1;
         }
-
         else {
             node.height = max(node.leftSon.height, node.rightSon.height) + 1;
         }
@@ -420,73 +409,104 @@ public class AvlTree implements Iterable<Integer> {
         }
     }
 
-    /**
-     * Removes the node with the given value from the tree, if it exists.
-     * @param toDelete The value to be deleted.
-     * @return True if was successfully deleted, false otherwise.
-     */
     public boolean delete(int toDelete){
         Node deleteNode = valueToNode(toDelete);
         if (deleteNode.value != toDelete){
             return false; //value is not in the tree
         }
-        Node father = deleteNode.father;
-        if (isLeaf(deleteNode)) {
+        Node father = deleteNode.getFather();
+        if (isLeaf(deleteNode)) {   //Checks if toDelete is a leaf.
             changeAncestorsChild(father, deleteNode, null);
             deleteNode = null;
             return true;
         }
 
-        Node child = singleChilded(deleteNode);
-        if (child != null){
-            child.father = father;
-            changeAncestorsChild(father, deleteNode, child);
+        Node singleChild = singleChilded(deleteNode);
+        if (singleChild != null){   //Checks if toDelete has only one chlid.
+            singleChild.setFather(father);
+            changeAncestorsChild(father, deleteNode, singleChild);
             deleteNode = null;
             return true;
         }
 
         Node successor = deleteNode.getSuccessor();
+//        System.out.println("My successor is " + successor.getValue());
+//        System.out.println("His father is " + successor.getFather().getValue());
+//        System.out.println("Right child is " + successor.getRightSon());
+//        System.out.println("Left child is " + successor.getLeftSon());
         swap(deleteNode, successor);
-        father = deleteNode.father;
+
+//        System.out.println("Now toDelete is " + deleteNode.getValue());
+//        System.out.println("His father is  " + deleteNode.getFather().getValue());
+//        System.out.println("Now toDelete is " + deleteNode.getValue());
+        father = deleteNode.getFather();
         changeAncestorsChild(father, deleteNode, null);
+        deleteNode = null;
         fixHeight(father);
-        Node curNode = fixTree(father);
+        Node curNode = fixTree(father); //Re-balancing the tree.
         while (curNode != null) {
             curNode = fixTree(curNode);
         }
         return true;
     }
 
+
     /*
-    Swaps two nodes and adjusts their pointers.
+    Checks if two nodes are part of the same nuclear family.
      */
-    private void swap(Node node1, Node node2){
-        Node node1Father = node1.father;
-        Node node1RightSon = node1.rightSon;
-        Node node1LeftSon = node1.leftSon;
-        Node node2Father = node2.father;
-        Node node2RightSon = node2.rightSon;
-        Node node2LeftSon = node2.leftSon;
-
-        node2.father = node1Father;
-        changeAncestorsChild(node1Father, node1, node2);
-        node2.leftSon = node1LeftSon;
-        node1LeftSon.father = node2;
-        node2.rightSon = node1RightSon;
-        node1RightSon.father = node2;
-
-        node1.father = node2Father;
-        changeAncestorsChild(node2Father, node2, node1);
-        node1.leftSon = node2LeftSon;
-        node2LeftSon.father = node1;
-        node1.rightSon = node2RightSon;
-        node2RightSon.father = node1;
-
-
+    private boolean sameFamily(Node node1, Node node2){
+        return node1 == node2.getFather() || node2 == node1.getFather();
     }
 
     /*
-    Changes the old son of an ancestor with a new son
+    Swaps two nodes and adjusts their pointers.
+     */
+    private void swap(Node deleteNode, Node successor){
+        Node deleteFather = deleteNode.getFather();
+        Node deleteRightSon = deleteNode.getRightSon();
+        Node deleteLeftSon = deleteNode.getLeftSon();
+        Node successorFather = successor.getFather();
+        if (sameFamily(deleteNode, successor)){
+//            System.out.println("Same Family!");
+            Node father = deleteNode;
+            Node grandfather =father.getFather();
+            Node child = successor;
+//            System.out.println("father is " +father.getValue());
+//            System.out.println("child is " +child.getValue());
+            child.setFather(father.getFather());
+            changeAncestorsChild(grandfather, father, child);
+            if (child == father.getRightSon()) {
+                father.getLeftSon().setFather(child);
+                child.setLeftSon(father.getLeftSon());
+                child.setRightSon(father);
+            }
+            else {
+                father.getRightSon().setFather(child);
+                child.setRightSon(father.getRightSon());
+                child.setLeftSon(father);
+            }
+            father.setFather(child);
+            father.setRightSon(child.getRightSon());
+            father.setLeftSon(child.getLeftSon());
+            return;
+            }
+        successor.setFather(deleteFather);
+        changeAncestorsChild(deleteFather, deleteNode, successor);
+        successor.setLeftSon(deleteLeftSon);
+        successor.setRightSon(deleteRightSon);
+        deleteLeftSon.setFather(successor);
+        deleteRightSon.setFather(successor);
+        deleteNode.setFather(successorFather);
+        changeAncestorsChild(successorFather, successor, deleteNode);
+        deleteNode.setLeftSon(null);
+        deleteNode.setRightSon(null);
+    }
+
+
+
+
+    /*
+    Changes the old son of an ancestor with a new son.
      */
     private void changeAncestorsChild(Node father, Node oldSon, Node newSon){
         if (father.leftSon == oldSon){
@@ -501,7 +521,7 @@ public class AvlTree implements Iterable<Integer> {
     Checks if a node is a leaf.
      */
     private boolean isLeaf(Node node){
-        return node.height == 0;
+        return node.getRightSon() == null && node.getLeftSon() == null;
     }
 
     /*
@@ -518,11 +538,6 @@ public class AvlTree implements Iterable<Integer> {
         return null;
     }
 
-     /**
-     * Returns whether a value is in the tree.
-     * @param searchVal The value to be searched.
-     * @return The depth of the node with that value, or -1 if it does not exist.
-     */
     public int contains(int searchVal){
         Node candidate = valueToNode(searchVal);
         if (candidate == null || candidate.value != searchVal) {
@@ -532,6 +547,7 @@ public class AvlTree implements Iterable<Integer> {
             return candidate.height;
         }
     }
+
 
 
     /**
