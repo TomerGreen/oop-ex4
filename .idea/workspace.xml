@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aaee164f-1a20-4709-854f-7daf59989dab" name="Default" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+=======
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
       <change beforePath="$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTree.java" afterPath="$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTree.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -20,9 +23,19 @@
         <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/Node.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="275">
+<<<<<<< HEAD
               <caret line="30" column="7" lean-forward="false" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
+=======
+              <caret line="30" column="7" lean-forward="true" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#947#948#0" expanded="true" />
+                <element signature="e#976#977#0" expanded="true" />
+                <element signature="e#2744#2745#0" expanded="true" />
+                <element signature="e#2772#2773#0" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
               </folding>
             </state>
           </provider>
@@ -31,6 +44,7 @@
       <file leaf-file-name="AvlTree.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTree.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="25">
               <caret line="164" column="46" lean-forward="true" selection-start-line="164" selection-start-column="46" selection-end-line="164" selection-end-column="46" />
               <folding />
@@ -46,6 +60,34 @@
               <folding>
                 <element signature="imports" expanded="true" />
                 <marker date="1526499262346" expanded="true" signature="1654:1659" ph="{...}" />
+=======
+            <state relative-caret-position="3675">
+              <caret line="297" column="0" lean-forward="true" selection-start-line="297" selection-start-column="0" selection-end-line="297" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1657#1658#0" expanded="true" />
+                <element signature="e#1701#1702#0" expanded="true" />
+                <element signature="e#1838#1839#0" expanded="true" />
+                <element signature="e#1865#1866#0" expanded="true" />
+                <element signature="e#5132#5133#0" expanded="true" />
+                <element signature="e#5159#5160#0" expanded="true" />
+                <element signature="e#11546#11547#0" expanded="true" />
+                <element signature="e#11573#11574#0" expanded="true" />
+                <element signature="e#12007#12008#0" expanded="true" />
+                <element signature="e#12051#12052#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AvlTreeTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTreeTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="700">
+              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
               </folding>
             </state>
           </provider>
@@ -55,7 +97,11 @@
         <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/NodeTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="175">
+<<<<<<< HEAD
               <caret line="14" column="21" lean-forward="false" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+=======
+              <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
               <folding />
             </state>
           </provider>
@@ -74,6 +120,14 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>getLocation</find>
+      <find>setHeight</find>
+      <find>checkViolation</find>
+      <find>checkViolations</find>
+      <find>fixTree</find>
+      <find>root</find>
+      <find>expected</find>
+      <find>\n</find>
+      <find>Ances</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -93,6 +147,10 @@
         <option value="$PROJECT_DIR$/src/AVLTree.java" />
         <option value="$PROJECT_DIR$/src/oop/ex4/data_structures/NodeTest.java" />
         <option value="$PROJECT_DIR$/src/oop/ex4/data_structures/AVLTree.java" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTreeTest.java" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
         <option value="$PROJECT_DIR$/src/oop/ex4/data_structures/Node.java" />
         <option value="$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTree.java" />
       </list>
@@ -179,8 +237,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.NodeTest">
-    <configuration name="NodeTest" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.AvlTreeTest.testViolations">
+    <configuration name="AvlTreeTest" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="oop.ex4.data_structures.*" />
@@ -191,29 +249,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="oop.ex4.data_structures" />
-      <option name="MAIN_CLASS_NAME" value="oop.ex4.data_structures.NodeTest" />
+      <option name="MAIN_CLASS_NAME" value="oop.ex4.data_structures.AvlTreeTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="NodeTest.createNode" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="oop-ex4" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="NodeTest" />
-      <option name="METHOD_NAME" value="createNode" />
-      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -246,7 +284,7 @@
       <module name="" />
       <envs />
     </configuration>
-    <configuration name="NodeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AvlTreeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="oop.ex4.data_structures.*" />
@@ -257,7 +295,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="oop.ex4.data_structures" />
-      <option name="MAIN_CLASS_NAME" value="oop.ex4.data_structures.NodeTest" />
+      <option name="MAIN_CLASS_NAME" value="oop.ex4.data_structures.AvlTreeTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -271,14 +309,69 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="NodeTest.createNode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <configuration name="AvlTreeTest.testSimpleOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="oop.ex4.data_structures.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <module name="oop-ex4" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="NodeTest" />
-      <option name="METHOD_NAME" value="createNode" />
+      <option name="PACKAGE_NAME" value="oop.ex4.data_structures" />
+      <option name="MAIN_CLASS_NAME" value="oop.ex4.data_structures.AvlTreeTest" />
+      <option name="METHOD_NAME" value="testSimpleOperations" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="AvlTreeTest.testVioations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="oop.ex4.data_structures.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="oop-ex4" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="oop.ex4.data_structures" />
+      <option name="MAIN_CLASS_NAME" value="oop.ex4.data_structures.AvlTreeTest" />
+      <option name="METHOD_NAME" value="testVioations" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="AvlTreeTest.testViolations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="oop.ex4.data_structures.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="oop-ex4" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="oop.ex4.data_structures" />
+      <option name="MAIN_CLASS_NAME" value="oop.ex4.data_structures.AvlTreeTest" />
+      <option name="METHOD_NAME" value="testViolations" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -351,18 +444,20 @@
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
-    <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="Android JUnit.NodeTest.createNode" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.NodeTest.createNode" />
-      <item index="2" class="java.lang.String" itemvalue="Android JUnit.NodeTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.NodeTest" />
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="JUnit.AvlTreeTest" />
+      <item index="1" class="java.lang.String" itemvalue="Android JUnit.AvlTreeTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.AvlTreeTest.testVioations" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.AvlTreeTest.testViolations" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.AvlTreeTest.testSimpleOperations" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.NodeTest" />
-        <item index="1" class="java.lang.String" itemvalue="Android JUnit.NodeTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.NodeTest.createNode" />
-        <item index="3" class="java.lang.String" itemvalue="Android JUnit.NodeTest.createNode" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.AvlTreeTest.testViolations" />
+        <item index="1" class="java.lang.String" itemvalue="Android JUnit.AvlTreeTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.AvlTreeTest.testSimpleOperations" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.AvlTreeTest.testVioations" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.AvlTreeTest" />
       </list>
     </recent_temporary>
   </component>
@@ -383,35 +478,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="NodeTest - 2018.05.15 at 12h 05m 11s.xml">
-      <configuration name="NodeTest" configurationId="JUnit" />
+    <history-entry file="AvlTreeTest_testViolations - 2018.05.16 at 19h 19m 14s.xml">
+      <configuration name="AvlTreeTest.testViolations" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="NodeTest - 2018.05.15 at 12h 17m 45s.xml">
-      <configuration name="NodeTest" configurationId="JUnit" />
+    <history-entry file="AvlTreeTest_testViolations - 2018.05.16 at 19h 19m 49s.xml">
+      <configuration name="AvlTreeTest.testViolations" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="NodeTest - 2018.05.15 at 12h 18m 00s.xml">
-      <configuration name="NodeTest" configurationId="JUnit" />
+    <history-entry file="AvlTreeTest_testViolations - 2018.05.16 at 19h 21m 31s.xml">
+      <configuration name="AvlTreeTest.testViolations" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="NodeTest_createNode - 2018.05.13 at 19h 15m 47s.xml">
-      <configuration name="NodeTest.createNode" configurationId="AndroidJUnit" />
+    <history-entry file="AvlTreeTest_testViolations - 2018.05.16 at 19h 22m 36s.xml">
+      <configuration name="AvlTreeTest.testViolations" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="NodeTest_createNode - 2018.05.13 at 19h 17m 08s.xml">
-      <configuration name="NodeTest.createNode" configurationId="AndroidJUnit" />
+    <history-entry file="AvlTreeTest_testViolations - 2018.05.16 at 19h 23m 07s.xml">
+      <configuration name="AvlTreeTest.testViolations" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="NodeTest_createNode - 2018.05.13 at 19h 18m 13s.xml">
-      <configuration name="NodeTest.createNode" configurationId="AndroidJUnit" />
+    <history-entry file="AvlTreeTest_testViolations - 2018.05.16 at 19h 23m 49s.xml">
+      <configuration name="AvlTreeTest.testViolations" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="NodeTest_createNode - 2018.05.13 at 19h 18m 52s.xml">
-      <configuration name="NodeTest.createNode" configurationId="AndroidJUnit" />
+    <history-entry file="AvlTreeTest_testViolations - 2018.05.16 at 20h 58m 39s.xml">
+      <configuration name="AvlTreeTest.testViolations" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="NodeTest_createNode - 2018.05.13 at 19h 19m 02s.xml">
-      <configuration name="NodeTest.createNode" configurationId="AndroidJUnit" />
+    <history-entry file="AvlTreeTest_testViolations - 2018.05.16 at 21h 12m 56s.xml">
+      <configuration name="AvlTreeTest.testViolations" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="NodeTest_createNode - 2018.05.13 at 19h 19m 14s.xml">
-      <configuration name="NodeTest.createNode" configurationId="AndroidJUnit" />
+    <history-entry file="AvlTreeTest_testViolations - 2018.05.16 at 21h 22m 01s.xml">
+      <configuration name="AvlTreeTest.testViolations" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="NodeTest_createNode - 2018.05.13 at 19h 34m 13s.xml">
-      <configuration name="NodeTest.createNode" configurationId="JUnit" />
+    <history-entry file="AvlTreeTest_testViolations - 2018.05.16 at 22h 27m 31s.xml">
+      <configuration name="AvlTreeTest.testViolations" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -452,7 +547,6 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39954597" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291714" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -502,6 +596,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/Node.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -512,6 +607,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
     <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/NodeTest.java" />
     <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/Node.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -519,6 +616,13 @@
           <caret line="0" column="27" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
+=======
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           </folding>
         </state>
       </provider>
@@ -527,7 +631,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="31" lean-forward="true" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+<<<<<<< HEAD
           <folding />
+=======
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1657#1658#0" expanded="true" />
+            <element signature="e#1701#1702#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#5132#5133#0" expanded="true" />
+            <element signature="e#5159#5160#0" expanded="true" />
+            <element signature="e#11546#11547#0" expanded="true" />
+            <element signature="e#11573#11574#0" expanded="true" />
+            <element signature="e#12007#12008#0" expanded="true" />
+            <element signature="e#12051#12052#0" expanded="true" />
+          </folding>
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
         </state>
       </provider>
     </entry>
@@ -538,6 +658,13 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
+=======
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           </folding>
         </state>
       </provider>
@@ -546,7 +673,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+<<<<<<< HEAD
           <folding />
+=======
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1657#1658#0" expanded="true" />
+            <element signature="e#1701#1702#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#5132#5133#0" expanded="true" />
+            <element signature="e#5159#5160#0" expanded="true" />
+            <element signature="e#11546#11547#0" expanded="true" />
+            <element signature="e#11573#11574#0" expanded="true" />
+            <element signature="e#12007#12008#0" expanded="true" />
+            <element signature="e#12051#12052#0" expanded="true" />
+          </folding>
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
         </state>
       </provider>
     </entry>
@@ -578,7 +721,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+<<<<<<< HEAD
           <folding />
+=======
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1657#1658#0" expanded="true" />
+            <element signature="e#1701#1702#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#5132#5133#0" expanded="true" />
+            <element signature="e#5159#5160#0" expanded="true" />
+            <element signature="e#11546#11547#0" expanded="true" />
+            <element signature="e#11573#11574#0" expanded="true" />
+            <element signature="e#12007#12008#0" expanded="true" />
+            <element signature="e#12051#12052#0" expanded="true" />
+          </folding>
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
         </state>
       </provider>
     </entry>
@@ -588,6 +747,13 @@
           <caret line="68" column="18" lean-forward="true" selection-start-line="68" selection-start-column="18" selection-end-line="68" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
+=======
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           </folding>
         </state>
       </provider>
@@ -598,6 +764,13 @@
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
+=======
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           </folding>
         </state>
       </provider>
@@ -607,7 +780,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="31" lean-forward="false" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+<<<<<<< HEAD
           <folding />
+=======
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1657#1658#0" expanded="true" />
+            <element signature="e#1701#1702#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#5132#5133#0" expanded="true" />
+            <element signature="e#5159#5160#0" expanded="true" />
+            <element signature="e#11546#11547#0" expanded="true" />
+            <element signature="e#11573#11574#0" expanded="true" />
+            <element signature="e#12007#12008#0" expanded="true" />
+            <element signature="e#12051#12052#0" expanded="true" />
+          </folding>
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
         </state>
       </provider>
     </entry>
@@ -617,6 +806,13 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
+=======
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           </folding>
         </state>
       </provider>
@@ -628,6 +824,13 @@
           <caret line="0" column="27" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
+=======
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           </folding>
         </state>
       </provider>
@@ -636,7 +839,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="31" lean-forward="true" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+<<<<<<< HEAD
           <folding />
+=======
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1657#1658#0" expanded="true" />
+            <element signature="e#1701#1702#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#5132#5133#0" expanded="true" />
+            <element signature="e#5159#5160#0" expanded="true" />
+            <element signature="e#11546#11547#0" expanded="true" />
+            <element signature="e#11573#11574#0" expanded="true" />
+            <element signature="e#12007#12008#0" expanded="true" />
+            <element signature="e#12051#12052#0" expanded="true" />
+          </folding>
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
         </state>
       </provider>
     </entry>
@@ -647,6 +866,13 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
+=======
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           </folding>
         </state>
       </provider>
@@ -655,7 +881,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+<<<<<<< HEAD
           <folding />
+=======
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1657#1658#0" expanded="true" />
+            <element signature="e#1701#1702#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#5132#5133#0" expanded="true" />
+            <element signature="e#5159#5160#0" expanded="true" />
+            <element signature="e#11546#11547#0" expanded="true" />
+            <element signature="e#11573#11574#0" expanded="true" />
+            <element signature="e#12007#12008#0" expanded="true" />
+            <element signature="e#12051#12052#0" expanded="true" />
+          </folding>
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
         </state>
       </provider>
     </entry>
@@ -687,7 +929,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
           <caret line="14" column="22" lean-forward="true" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+<<<<<<< HEAD
           <folding />
+=======
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1657#1658#0" expanded="true" />
+            <element signature="e#1701#1702#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#5132#5133#0" expanded="true" />
+            <element signature="e#5159#5160#0" expanded="true" />
+            <element signature="e#11546#11547#0" expanded="true" />
+            <element signature="e#11573#11574#0" expanded="true" />
+            <element signature="e#12007#12008#0" expanded="true" />
+            <element signature="e#12051#12052#0" expanded="true" />
+          </folding>
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
         </state>
       </provider>
     </entry>
@@ -697,6 +955,13 @@
           <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
+=======
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           </folding>
         </state>
       </provider>
@@ -707,6 +972,13 @@
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
+=======
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           </folding>
         </state>
       </provider>
@@ -723,7 +995,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="31" lean-forward="false" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+<<<<<<< HEAD
           <folding />
+=======
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1657#1658#0" expanded="true" />
+            <element signature="e#1701#1702#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#5132#5133#0" expanded="true" />
+            <element signature="e#5159#5160#0" expanded="true" />
+            <element signature="e#11546#11547#0" expanded="true" />
+            <element signature="e#11573#11574#0" expanded="true" />
+            <element signature="e#12007#12008#0" expanded="true" />
+            <element signature="e#12051#12052#0" expanded="true" />
+          </folding>
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
         </state>
       </provider>
     </entry>
@@ -733,6 +1021,13 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
+=======
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           </folding>
         </state>
       </provider>
@@ -751,6 +1046,13 @@
           <caret line="0" column="27" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
+=======
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           </folding>
         </state>
       </provider>
@@ -759,7 +1061,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="31" lean-forward="true" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+<<<<<<< HEAD
           <folding />
+=======
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1657#1658#0" expanded="true" />
+            <element signature="e#1701#1702#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#5132#5133#0" expanded="true" />
+            <element signature="e#5159#5160#0" expanded="true" />
+            <element signature="e#11546#11547#0" expanded="true" />
+            <element signature="e#11573#11574#0" expanded="true" />
+            <element signature="e#12007#12008#0" expanded="true" />
+            <element signature="e#12051#12052#0" expanded="true" />
+          </folding>
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
         </state>
       </provider>
     </entry>
@@ -777,6 +1095,13 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+<<<<<<< HEAD
+=======
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           </folding>
         </state>
       </provider>
@@ -785,7 +1110,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+<<<<<<< HEAD
           <folding />
+=======
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1657#1658#0" expanded="true" />
+            <element signature="e#1701#1702#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#5132#5133#0" expanded="true" />
+            <element signature="e#5159#5160#0" expanded="true" />
+            <element signature="e#11546#11547#0" expanded="true" />
+            <element signature="e#11573#11574#0" expanded="true" />
+            <element signature="e#12007#12008#0" expanded="true" />
+            <element signature="e#12051#12052#0" expanded="true" />
+          </folding>
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
         </state>
       </provider>
     </entry>
@@ -822,7 +1163,11 @@
     <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/NodeTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
+<<<<<<< HEAD
           <caret line="14" column="21" lean-forward="false" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+=======
+          <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           <folding />
         </state>
       </provider>
@@ -830,18 +1175,56 @@
     <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/Node.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
+<<<<<<< HEAD
           <caret line="30" column="7" lean-forward="false" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
+=======
+          <caret line="30" column="7" lean-forward="true" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#2744#2745#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTreeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="700">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/oop/ex4/data_structures/AvlTree.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="25">
           <caret line="164" column="46" lean-forward="true" selection-start-line="164" selection-start-column="46" selection-end-line="164" selection-end-column="46" />
           <folding />
+=======
+        <state relative-caret-position="3675">
+          <caret line="297" column="0" lean-forward="true" selection-start-line="297" selection-start-column="0" selection-end-line="297" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1657#1658#0" expanded="true" />
+            <element signature="e#1701#1702#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#5132#5133#0" expanded="true" />
+            <element signature="e#5159#5160#0" expanded="true" />
+            <element signature="e#11546#11547#0" expanded="true" />
+            <element signature="e#11573#11574#0" expanded="true" />
+            <element signature="e#12007#12008#0" expanded="true" />
+            <element signature="e#12051#12052#0" expanded="true" />
+          </folding>
+>>>>>>> 57aff793dc86c83ccfcc17469c386cb7150ea220
         </state>
       </provider>
     </entry>
