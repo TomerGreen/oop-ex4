@@ -327,10 +327,9 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
     }
 
     /**
-     * Returns an iterator for the AVL tree. The iterator
-     * @return
+     * Returns an iterator for the AVL tree.
+     * @return The iterator
      */
-
     public Iterator<Integer> iterator() {
         LinkedList<Integer> treeList = getTreeList();
         return treeList.iterator();
