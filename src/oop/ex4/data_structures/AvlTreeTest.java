@@ -208,12 +208,32 @@ public class AvlTreeTest {
         assertEquals(67108863, AvlTree.findMaxNodes(25));
     }
 
-    private void compareToRandomSet(int size) {
+    /**
+     * Returns a random set with a given number of insertions (not necessarily the final set size).
+     * @param size The number of random integers added to the set.
+     */
+    private TreeSet<Integer> getRandomSet(int size) {
         TreeSet<Integer> intSet = new TreeSet<>();
         Random random = new Random();
         for (int i=0; i < size; i++) {
             intSet.add(random.nextInt());
         }
+        return intSet;
+    }
+
+    private AvlTree getRandomTree(int size) {
+        TreeSet<Integer> intSet = getRandomSet(size);
+        int[] intArray = new int[intSet.size()];
+        int index = 0;
+        for (int value : intSet) {
+            intArray[index] = value;
+            index++;
+        }
+        return new AvlTree(intArray);
+    }
+
+    private void compareToRandomSet(int size) {
+        TreeSet<Integer> intSet = getRandomSet(size);
         int[] intArray = new int[intSet.size()];
         int index = 0;
         for (int value : intSet) {
@@ -234,5 +254,16 @@ public class AvlTreeTest {
         int LARGE_SET_SIZE = 100;
         compareToRandomSet(SMALL_SET_SIZE);
         compareToRandomSet(LARGE_SET_SIZE);
+    }
+
+    @Test
+    public void testCopyConstructor() {
+        AvlTree original = getRandomTree(200);
+        AvlTree copy = new AvlTree(original);
+        Iterator<Integer> originalIterator = original.iterator();
+        Iterator<Integer> copyIterator = copy.iterator();
+        while (originalIterator.hasNext() || copyIterator.hasNext()) {
+            assertEquals(originalIterator.next(), copyIterator.next());
+        }
     }
 }
