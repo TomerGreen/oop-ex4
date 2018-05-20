@@ -204,17 +204,12 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
         }
     }
 
-    private int getNodeDepth(Node node) {
-        if (node.value == root.value) {
-            return 0;
-        }
-        else if (node.value < root.value) {
-            return root.leftSon.height - node.height + 1;
-        }
-        else {
-            return root.rightSon.height - node.height + 1;
-        }
-    }
+    /**
+     * Returns the depth of a given node in the tree, if it exists.
+     * @param node The node whose depth we want.
+     * @return The node's depth in the tree.
+     */
+    protected abstract int getNodeDepth(Node node);
 
     /**
      * Add a new node with the given key to the tree.

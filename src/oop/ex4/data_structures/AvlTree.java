@@ -315,5 +315,19 @@ public class AvlTree extends BinarySearchTree {
         return true;
     }
 
+    protected int getNodeDepth(Node node) {
+        if (node == null) {
+            return -1;
+        }
+        if (node.value == root.value) {
+            return 0;
+        }
+        else if (node.value < root.value) {
+            return root.leftSon.height - node.height + 1;
+        }
+        else {
+            return root.rightSon.height - node.height + 1;
+        }
+    }
 
 }
