@@ -318,6 +318,9 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
 
     private LinkedList<Integer> getTreeList() {
         LinkedList<Integer> list = new LinkedList<>();
+        if (root == null) {
+            return list;
+        }
         Node currNode = root.getSubtreeMinNode();
         while (currNode != null) {
             list.add(currNode.value);
