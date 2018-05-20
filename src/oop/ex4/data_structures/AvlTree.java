@@ -23,8 +23,13 @@ public class AvlTree extends BinarySearchTree {
      */
     public AvlTree(int[] data) {
         size = 0;
-        for (int value : data) {
-            this.add(value);
+        if (data == null) {
+            root = null;
+        }
+        else {
+            for (int value : data) {
+                this.add(value);
+            }
         }
     }
 
@@ -33,10 +38,15 @@ public class AvlTree extends BinarySearchTree {
      * @param tree The copied tree.
      */
     public AvlTree(AvlTree tree) {
-        for (int value : tree) {
-            this.add(value);
+        size = 0;
+        if (tree == null) {
+            root = null;
         }
-        size = tree.size();
+        else {
+            for (int value : tree) {
+                this.add(value);
+            }
+        }
     }
 
     /**

@@ -2,6 +2,7 @@ package oop.ex4.data_structures;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 import static java.lang.Math.abs;
 
@@ -125,6 +126,51 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
         }
         public Node getFather(){
             return father;
+        }
+    }
+
+    /* ================================= END SUB-CLASS ================================= */
+
+    /* ======================== BINARY TREE ITERATOR SUB-CLASS ========================= */
+
+    /**
+     * Implements an iterator for an ordered binary tree.
+     * The iterator iterates through integer values in ascending order.
+     */
+    protected class BinaryTreeIterator implements Iterator<Integer> {
+
+        /** The root of the tree that we iterate on. */
+        Node treeRoot;
+
+        /** The node of which the value was returned by nex(). */
+        Node currNode;
+
+        BinaryTreeIterator(Node treeRoot) {
+            this.treeRoot = root;
+            this.currNode = null;
+        }
+
+        public boolean hasNext() {
+            // The next value exists unless we are on a node with no successor, or the tree is empty.
+            return (!(currNode != null && currNode.getSuccessor() == null) && !(treeRoot == null));
+        }
+
+        public Integer next() throws NoSuchElementException {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            // Haven't begun iterating yet.
+            else if (currNode == null) {
+                currNode = treeRoot.getSubtreeMinNode();
+            }
+            else {
+                currNode = currNode.getSuccessor();
+            }
+            return currNode.getValue();
+        }
+
+        public void remove() throws UnsupportedOperationException {
+            throw new UnsupportedOperationException();
         }
     }
 
@@ -312,30 +358,11 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
     }
 
     /**
-     * Returns an ordered list of the values in the tree.
-     * @return An ascending order integer list of values in the tree.
-     */
-
-    private LinkedList<Integer> getTreeList() {
-        LinkedList<Integer> list = new LinkedList<>();
-        if (root == null) {
-            return list;
-        }
-        Node currNode = root.getSubtreeMinNode();
-        while (currNode != null) {
-            list.add(currNode.value);
-            currNode = currNode.getSuccessor();
-        }
-        return list;
-    }
-
-    /**
      * Returns an iterator for the AVL tree.
      * @return The iterator
      */
     public Iterator<Integer> iterator() {
-        LinkedList<Integer> treeList = getTreeList();
-        return treeList.iterator();
+        return new BinaryTreeIterator(this.root);
     }
 
 }

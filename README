@@ -11,15 +11,19 @@ tomerg
 =          Design           =
 =============================
 
+*  For purposes of extendability we chose to implement AvlTree as a class inheriting from an abstract BinarySearchTree
+class. This is because all of the fields and nested classes, and some of the methods of AvlTree can be applied to any
+ordered binary tree if one chooses to implement a new class.
+
+*  We decided to nest the Node and BinaryTreeIterator classes in the abstract BinarySearchTree class. This is because
+objects in these classes can be used by any ordered binary tree. Additionally, we do not want Node or Iterator
+instances to be created outside the context of an actual binary search tree. It also enabled us to discard some getters
+and setters for these classes, since BinarySearchTree has access to their private fields.
+
 
 =============================
 =  Implementation details   =
 =============================
-
-*  We chose to implement iterator() by first creating a linkedList which contains the values in the tree in ascending
-order. The AvlTree iterator is than the iterator of this linkedList. This utilizes the iterator implementation of
-a linked list without having to implement iterator methods ourselves. It also enables us to iterate over the tree as
-it was when the iterator was created, instead of its current state, as required according to answers in the forum.
 
 *  In order to refrain from having to probe the tree twice in every add operation, we wrote a helper function that,
 when given a value, returns either a node with that value, or the parent node of that value were it added to the tree.
