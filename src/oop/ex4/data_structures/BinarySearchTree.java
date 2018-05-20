@@ -195,13 +195,24 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
      * @param searchVal The value to be searched.
      * @return The depth of the node with that value, or -1 if it does not exist.
      */
-    public int contains(int searchVal){
+    public int contains(int searchVal) {
         Node candidate = valueToNode(searchVal);
         if (candidate == null || candidate.value != searchVal) {
             return -1;
+        } else {
+            return getNodeDepth(candidate);
+        }
+    }
+
+    private int getNodeDepth(Node node) {
+        if (node.value == root.value) {
+            return 0;
+        }
+        else if (node.value < root.value) {
+            return root.leftSon.height - node.height + 1;
         }
         else {
-            return candidate.height;
+            return root.rightSon.height - node.height + 1;
         }
     }
 
