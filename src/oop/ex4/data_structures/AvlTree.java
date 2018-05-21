@@ -1,4 +1,5 @@
 package oop.ex4.data_structures;
+
 import java.math.*;
 import java.util.*;
 
@@ -19,14 +20,14 @@ public class AvlTree extends BinarySearchTree {
 
     /**
      * Creates a new tree by adding values from an array, one by one.
+     *
      * @param data The array of values that
      */
     public AvlTree(int[] data) {
         size = 0;
         if (data == null) {
             root = null;
-        }
-        else {
+        } else {
             for (int value : data) {
                 this.add(value);
             }
@@ -35,14 +36,14 @@ public class AvlTree extends BinarySearchTree {
 
     /**
      * A copy constructor that creates a new tree from an existing one.
+     *
      * @param tree The copied tree.
      */
     public AvlTree(AvlTree tree) {
         size = 0;
         if (tree == null) {
             root = null;
-        }
-        else {
+        } else {
             for (int value : tree) {
                 this.add(value);
             }
@@ -51,6 +52,7 @@ public class AvlTree extends BinarySearchTree {
 
     /**
      * Returns the maximum number of nodes in an AVL tree of a given height.
+     *
      * @param h An AVL tree height
      * @return The minimum number of nodes in a tree of that height.
      */
@@ -69,6 +71,7 @@ public class AvlTree extends BinarySearchTree {
     /**
      * Returns the minimum number of nodes in an AVL tree of a given height.
      * A minimal tree of height h has a root, a subtree of height h-1 and a subtree of height h-2.
+     *
      * @param h An AVL tree height
      * @return The minimum number of nodes in a tree of that height.
      */
@@ -79,24 +82,22 @@ public class AvlTree extends BinarySearchTree {
         if (h == 0) {
             return 1;
         }
-        return 1 + findMinNodes(h-1) + findMinNodes(h-2);
+        return 1 + findMinNodes(h - 1) + findMinNodes(h - 2);
     }
 
-    public boolean add(int newValue){
+    public boolean add(int newValue) {
         Node father = expectedParent(newValue);
-        if(father != null){
+        if (father != null) {
             Node newNode = new Node(father, newValue);
-            if (newValue > father.value){
+            if (newValue > father.value) {
                 father.rightSon = newNode;
-            }
-            else{
+            } else {
                 father.leftSon = newNode;
             }
             fixTree(newNode);
             size++;
             return true;
-        }
-        else if (father == null && root == null){   //The tree is empty!
+        } else if (father == null && root == null) {   //The tree is empty!
             root = new Node(newValue);
             size++;
             return true;
@@ -107,17 +108,14 @@ public class AvlTree extends BinarySearchTree {
     /*
     Updates the heights of a node according to its children's heights.
      */
-    private void fixHeight(Node node){
-        if (isLeaf(node)){
+    private void fixHeight(Node node) {
+        if (isLeaf(node)) {
             node.height = 0;
-        }
-        else if (node.rightSon == null){
-            node.height = (node.leftSon.height+1);
-        }
-        else if (node.leftSon == null){
-            node.height = node.rightSon.height+1;
-        }
-        else {
+        } else if (node.rightSon == null) {
+            node.height = (node.leftSon.height + 1);
+        } else if (node.leftSon == null) {
+            node.height = node.rightSon.height + 1;
+        } else {
             node.height = max(node.leftSon.height, node.rightSon.height) + 1;
         }
 
@@ -127,17 +125,17 @@ public class AvlTree extends BinarySearchTree {
     Climbs up from the leaf to the root and checks for violations.
     Returns the node at which the violation happened.
      */
-    private Node fixTree(Node newNode){
+    private Node fixTree(Node newNode) {
         Node grandchild = newNode;
         Node child = newNode.father;
-        Node father= child.father;
+        Node father = child.father;
         fixHeight(child);
-        if (father == null){
+        if (father == null) {
             return null;
         }
-        while (father.father != null){
+        while (father.father != null) {
             fixHeight(father);
-            if (checkViolations(father, child, grandchild)){
+            if (checkViolations(father, child, grandchild)) {
                 return father;
             }
             grandchild = child;
@@ -152,17 +150,18 @@ public class AvlTree extends BinarySearchTree {
 
     /**
      * DEBUG METHOD - DELETE WHEN SUBMITTING
+     *
      * @return
      */
-    public boolean isAVLOkay(Node node){
-        if (node == null){
+    public boolean isAVLOkay(Node node) {
+        if (node == null) {
             return true;
         }
-        if (node.leftSon != null || node.rightSon != null){
-            if (node.getHeightDiff() > 1){
+        if (node.leftSon != null || node.rightSon != null) {
+            if (node.getHeightDiff() > 1) {
                 return false;
             }
-           return isAVLOkay(node.leftSon) && isAVLOkay(node.rightSon);
+            return isAVLOkay(node.leftSon) && isAVLOkay(node.rightSon);
 
         }
         return true;
@@ -170,27 +169,25 @@ public class AvlTree extends BinarySearchTree {
 
     /**
      * DEBUG METHOD - DELETE WHEN SUBMITTING
+     *
      * @return
      */
-    public Node getRoot(){
+    public Node getRoot() {
         return root;
     }
 
     /*
      * This method checks if the AVL property is violated in a specific node.
      */
-    private boolean checkViolations(Node father, Node child, Node grandchild){
-        if (father.getHeightDiff() > 1){
-            if(child == father.rightSon &&  grandchild == child.rightSon){
+    private boolean checkViolations(Node father, Node child, Node grandchild) {
+        if (father.getHeightDiff() > 1) {
+            if (child == father.rightSon && grandchild == child.rightSon) {
                 fixRRViolation(father, child);
-            }
-            else if (child == father.rightSon && grandchild == child.leftSon){
+            } else if (child == father.rightSon && grandchild == child.leftSon) {
                 fixRLViolation(father, child, grandchild);
-            }
-            else if (child == father.leftSon && grandchild == child.rightSon){
+            } else if (child == father.leftSon && grandchild == child.rightSon) {
                 fixLRViolation(father, child, grandchild);
-            }
-            else if (child == father.leftSon && grandchild == child.leftSon){
+            } else if (child == father.leftSon && grandchild == child.leftSon) {
                 fixLLViolation(father, child);
             }
             return true;
@@ -201,17 +198,16 @@ public class AvlTree extends BinarySearchTree {
     /*
     Fixes an RR violation.
      */
-    private void fixRRViolation(Node father, Node child){
+    private void fixRRViolation(Node father, Node child) {
         Node grandfather = father.father;
         Node orphanNode = child.leftSon;
         child.leftSon = father;
         father.father = child;
-        father.height = father.height-2;
+        father.height = father.height - 2;
         if (grandfather != null) {
             changeAncestorsChild(grandfather, father, child);
             child.father = grandfather;
-        }
-        else{
+        } else {
             child.father = null;
             root = child;
         }
@@ -224,7 +220,7 @@ public class AvlTree extends BinarySearchTree {
     /*
     Fixes an RL violation.
      */
-    private void fixRLViolation(Node father, Node child, Node grandchild){
+    private void fixRLViolation(Node father, Node child, Node grandchild) {
         Node orphanChild = grandchild.rightSon;
         father.rightSon = grandchild;
         grandchild.father = father;
@@ -234,15 +230,15 @@ public class AvlTree extends BinarySearchTree {
         if (orphanChild != null) {
             orphanChild.father = child;
         }
-        child.height = child.height-1;
-        grandchild.height = grandchild.height+1;
+        child.height = child.height - 1;
+        grandchild.height = grandchild.height + 1;
         fixRRViolation(father, grandchild);
     }
 
     /*
     Fixes an LR violation.
      */
-    private void fixLRViolation(Node father, Node child, Node grandchild){
+    private void fixLRViolation(Node father, Node child, Node grandchild) {
         Node orphanChild = grandchild.leftSon;
         father.leftSon = grandchild;
         grandchild.father = father;
@@ -252,25 +248,24 @@ public class AvlTree extends BinarySearchTree {
         if (orphanChild != null) {
             orphanChild.father = child;
         }
-        child.height = child.height-1;
-        grandchild.height = grandchild.height+1;
+        child.height = child.height - 1;
+        grandchild.height = grandchild.height + 1;
         fixLLViolation(father, grandchild);
     }
 
     /*
     Fixes an LL violation.
      */
-    private void fixLLViolation(Node father, Node child){
+    private void fixLLViolation(Node father, Node child) {
         Node grandfather = father.father;
         Node orphanNode = child.rightSon;
         child.rightSon = father;
         father.father = child;
-        father.height = father.height-2;
-        if (grandfather != null){
+        father.height = father.height - 2;
+        if (grandfather != null) {
             changeAncestorsChild(grandfather, father, child);
             child.father = grandfather;
-        }
-        else{
+        } else {
             child.father = null;
             root = child;
         }
@@ -280,9 +275,9 @@ public class AvlTree extends BinarySearchTree {
         }
     }
 
-    public boolean delete(int toDelete){
+    public boolean delete(int toDelete) {
         Node deleteNode = valueToNode(toDelete);
-        if (deleteNode.value != toDelete){
+        if (deleteNode.value != toDelete) {
             return false; //value is not in the tree
         }
         Node father = deleteNode.father;
@@ -294,7 +289,7 @@ public class AvlTree extends BinarySearchTree {
         }
 
         Node singleChild = singleChilded(deleteNode);
-        if (singleChild != null){   //Checks if toDelete has only one chlid.
+        if (singleChild != null) {   //Checks if toDelete has only one chlid.
             singleChild.father = father;
             changeAncestorsChild(father, deleteNode, singleChild);
             deleteNode = null;
@@ -313,21 +308,6 @@ public class AvlTree extends BinarySearchTree {
         }
         size--;
         return true;
-    }
-
-    protected int getNodeDepth(Node node) {
-        if (node == null) {
-            return -1;
-        }
-        if (node.value == root.value) {
-            return 0;
-        }
-        else if (node.value < root.value) {
-            return root.leftSon.height - node.height + 1;
-        }
-        else {
-            return root.rightSon.height - node.height + 1;
-        }
     }
 
 }

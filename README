@@ -29,6 +29,10 @@ and setters for these classes, since BinarySearchTree has access to their privat
 when given a value, returns either a node with that value, or the parent node of that value were it added to the tree.
 We can then check if the value exists and get the node we should attach it to in one probing.
 
+*  We decided that the Node depth field will only be updated when searching for a value in the tree, in the case that it
+is found. This is because insertion and deletion functions manipulate node depths often, but do not make use of the
+field. We only need it when contains() is called and the value is found.
+
 =============================
 =   Answers to Questions    =
 =============================
