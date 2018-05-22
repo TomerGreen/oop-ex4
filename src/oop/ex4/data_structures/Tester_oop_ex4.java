@@ -70,7 +70,7 @@ public class Tester_oop_ex4 {
 		Iterator<Integer> setIter = set.iterator();
 
 
-		while (treeIter.hasNext() || setIter.hasNext() || secondTreeIter.hasNext()) {
+		while (treeIter.hasNext() || setIter.hasNext()|| secondTreeIter.hasNext()) {
 			Integer next = setIter.next();
 			assertEquals("The iterator is not sorted", next, treeIter.next());
 			assertEquals("The iterator is not sorted", next, secondTreeIter.next());
@@ -120,7 +120,7 @@ public class Tester_oop_ex4 {
 		for (int i = 0; i <= size; i++) {
 			int x = random.nextInt(size);
 			boolean b = set.remove(x);
-			System.out.println("Trying deletion " + i + "/" + size);
+//			System.out.println("Trying deletion " + i + "/" + size);
 			assertEquals("problem with deletion of " + x, b, tree.delete(x));
 			assertEquals("problem with deletion of " + x, b, secondTree.delete(x));
 
@@ -423,6 +423,7 @@ public class Tester_oop_ex4 {
 		errMsg = errMsgStart + "the size of the tree should be " + hashSet.size() + "...";
 		assertEquals(errMsg, hashSet.size(), tree.size());
 		for (Move move : testData) {
+//			System.out.println("Move type is "  + move.type);
 			switch (move.type) {
 				case Move.ADD:
 					errMsg = errMsgStart + "trying to add " + move.data + "...";
@@ -436,8 +437,10 @@ public class Tester_oop_ex4 {
 			errMsg = errMsgStart + "the size of the tree should be " + hashSet.size() + "...";
 			assertEquals(errMsg, hashSet.size(), tree.size());
 		}
+//		System.out.println("ALREADY HERE \n\n");
 		for (Move move : testData) {
 			if (hashSet2.contains(move.data)) continue;
+//			System.out.println("Checking contains of " + move.data);
 			errMsg = errMsgStart + "the depth of " + move.data + " should be " + move.depth + "...";
 			assertEquals(errMsg, move.depth, tree.contains(move.data));
 

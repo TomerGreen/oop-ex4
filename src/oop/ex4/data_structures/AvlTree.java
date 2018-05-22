@@ -1,5 +1,6 @@
 package oop.ex4.data_structures;
 
+import java.awt.desktop.SystemSleepEvent;
 import java.math.*;
 import java.util.*;
 
@@ -97,7 +98,7 @@ public class AvlTree extends BinarySearchTree {
             fixTree(newNode);
             size++;
             return true;
-        } else if (father == null && root == null) {   //The tree is empty!
+        } else if (father == null && root == null) {     //The tree is empty!
             root = new Node(newValue);
             size++;
             return true;
@@ -128,6 +129,9 @@ public class AvlTree extends BinarySearchTree {
     private Node fixTree(Node newNode) {
         Node grandchild = newNode;
         Node child = newNode.father;
+        if (child == null){
+            return null;
+        }
         Node father = child.father;
         fixHeight(child);
         if (father == null) {
@@ -141,39 +145,10 @@ public class AvlTree extends BinarySearchTree {
             grandchild = child;
             child = father;
             father = father.father;
-
         }
         fixHeight(father);
         checkViolations(father, child, grandchild);
         return null;
-    }
-
-    /**
-     * DEBUG METHOD - DELETE WHEN SUBMITTING
-     *
-     * @return
-     */
-    public boolean isAVLOkay(Node node) {
-        if (node == null) {
-            return true;
-        }
-        if (node.leftSon != null || node.rightSon != null) {
-            if (node.getHeightDiff() > 1) {
-                return false;
-            }
-            return isAVLOkay(node.leftSon) && isAVLOkay(node.rightSon);
-
-        }
-        return true;
-    }
-
-    /**
-     * DEBUG METHOD - DELETE WHEN SUBMITTING
-     *
-     * @return
-     */
-    public Node getRoot() {
-        return root;
     }
 
     /*
@@ -275,39 +250,105 @@ public class AvlTree extends BinarySearchTree {
         }
     }
 
+    /*
+    A helper method to delete a node if it has a single child. Returns true always.
+     */
+    private boolean singleChildDelete(Node deleteNode, Node singleChild, Node father){
+        if (deleteNode == root){
+            root = singleChild;
+            root.father = null;
+            size--;
+            return true;
+        }
+        singleChild.father = father;
+        changeAncestorsChild(father, deleteNode, singleChild);
+        size--;
+        father = deleteNode.father;
+        reBalanceTree(father);
+        return true;
+    }
+
+    /*
+    A helper method to delete a node if it is a leaf. Returns true always.
+     */
+    private boolean leafDelete(Node deleteNode, Node father){
+        if (deleteNode == root){ //Tree only has a root
+            root = null;
+            size--;
+            return true;
+        }
+        changeAncestorsChild(father, deleteNode, null);
+        father = deleteNode.father;
+        reBalanceTree(father);
+        size--;
+        return true;
+    }
+
     public boolean delete(int toDelete) {
         Node deleteNode = valueToNode(toDelete);
-        if (deleteNode.value != toDelete) {
+        if (deleteNode == null || deleteNode.value != toDelete) {
             return false; //value is not in the tree
         }
         Node father = deleteNode.father;
         if (isLeaf(deleteNode)) {   //Checks if toDelete is a leaf.
-            changeAncestorsChild(father, deleteNode, null);
-            deleteNode = null;
-            size--;
-            return true;
+            return leafDelete(deleteNode, father);
         }
-
         Node singleChild = singleChilded(deleteNode);
-        if (singleChild != null) {   //Checks if toDelete has only one chlid.
-            singleChild.father = father;
-            changeAncestorsChild(father, deleteNode, singleChild);
-            deleteNode = null;
-            size--;
-            return true;
+        if (singleChild != null) {   //Checks if toDelete has only one child.
+            return singleChildDelete(deleteNode, singleChild, father);
         }
         Node successor = deleteNode.getSuccessor();
         swap(deleteNode, successor);
         father = deleteNode.father;
-        changeAncestorsChild(father, deleteNode, null);
-        deleteNode = null;
-        fixHeight(father);
-        Node curNode = fixTree(father); //Re-balancing the tree.
-        while (curNode != null) {
-            curNode = fixTree(curNode);
+        if (!isLeaf(deleteNode)){ //the original successor had a right son.
+            return singleChildDelete(deleteNode, deleteNode.rightSon, father);
         }
-        size--;
-        return true;
+        return leafDelete(deleteNode, father);
     }
+
+    /*
+    A method that returns the bigger son of a given father. Returns null if father has a leaf.
+    If both sons have the same height, returns the left son.
+     */
+    private Node getBiggerSon(Node father){
+        if (isLeaf(father)){
+            return null;
+        }
+        else if (father.rightSon == null){
+            return father.leftSon;
+        }
+        else if (father.leftSon == null){
+            return father.rightSon;
+        }
+
+        else if (father.rightSon.height > father.leftSon.height){
+            return father.rightSon;
+        }
+        return father.leftSon;
+    }
+
+    /*
+    A recursive function that balances the tree after a deletion.
+     */
+    private void reBalanceTree(Node father){
+        if (father == null){
+            return;
+        }
+        fixHeight(father);
+        Node child = getBiggerSon(father);
+        if (child == null){    //There is no possibility for a violation on this node - moving up the tree.
+            reBalanceTree(father.father);
+            return;
+        }
+        Node grandchild = getBiggerSon(child);
+        if (grandchild == null){ //There is no possibility for a violation on this node - moving up the tree.
+            reBalanceTree(father.father);
+            return;
+        }
+        checkViolations(father, child, grandchild);
+        reBalanceTree(father.father);
+    }
+
+
 
 }

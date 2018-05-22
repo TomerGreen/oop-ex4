@@ -6,6 +6,9 @@ import java.util.NoSuchElementException;
 
 import static java.lang.Math.abs;
 
+/**
+ * An abstract class representing a binray search tree.
+ */
 public abstract class BinarySearchTree implements Iterable<Integer> {
 
 
@@ -14,17 +17,17 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
     /**
      * This class represents a node in an AVL tree.
      */
-    protected class Node {
+    class Node {
         /*The height and the numeric value of the node.*/
-        protected int height, depth, value;
+        int height, depth, value;
         /*The node's pointers to its father, left son and right son. */
-        protected Node rightSon, leftSon, father;
+        Node rightSon, leftSon, father;
 
         /**
          * An Empty constructor of Node.
          */
         Node(int value) {
-            this.father = null;
+            father = null;
             this.value = value;
             leftSon = null;
             rightSon = null;
@@ -59,7 +62,7 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
          *
          * @return the height difference between the two children of a node.
          */
-        protected int getHeightDiff() {
+        int getHeightDiff() {
             if (leftSon == null && rightSon == null) {
                 return 0;
             } else if (leftSon == null) {
@@ -77,7 +80,7 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
          *
          * @return The subtree minimal node.
          */
-        protected Node getSubtreeMinNode() {
+        Node getSubtreeMinNode() {
             Node minNode = this;
             while (minNode.leftSon != null) {
                 minNode = minNode.leftSon;
@@ -112,34 +115,13 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
          *
          * @return The successor node.
          */
-        protected Node getSuccessor() {
+        Node getSuccessor() {
             // If it has a right son, return the minimal node in its subtree.
             if (this.rightSon != null) {
                 return this.rightSon.getSubtreeMinNode();
             } else {
                 return this.getAncestorSuccessor();
             }
-        }
-
-        /**
-         * DELTE WHEN FINISHED DEBUGGING
-         *
-         * @return
-         */
-        public int getValue() {
-            return value;
-        }
-
-        public Node getRightSon() {
-            return rightSon;
-        }
-
-        public Node getLeftSon() {
-            return leftSon;
-        }
-
-        public Node getFather() {
-            return father;
         }
     }
 
@@ -151,7 +133,7 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
      * Implements an iterator for an ordered binary tree.
      * The iterator iterates through integer values in ascending order.
      */
-    protected class BinaryTreeIterator implements Iterator<Integer> {
+    class BinaryTreeIterator implements Iterator<Integer> {
 
         /**
          * The root of the tree that we iterate on.
@@ -183,7 +165,7 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
             } else {
                 currNode = currNode.getSuccessor();
             }
-            return currNode.getValue();
+            return currNode.value;
         }
 
         public void remove() throws UnsupportedOperationException {
@@ -196,12 +178,12 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
     /**
      * The number of nodes in the tree
      */
-    protected int size;
+    int size;
 
     /**
      * The root node.
      */
-    protected Node root;
+    Node root;
 
     /**
      * returns the number of nodes in the tree.
@@ -251,7 +233,7 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
      * @param oldSon The old son Node
      * @param newSon The new son Node
      */
-    protected void changeAncestorsChild(Node father, Node oldSon, Node newSon) {
+    void changeAncestorsChild(Node father, Node oldSon, Node newSon) {
         if (father.leftSon == oldSon) {
             father.leftSon = newSon;
         } else if (father.rightSon == oldSon) {
@@ -265,7 +247,7 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
      * @param node the node to be checked.
      * @return true if leaf, false otherwise.
      */
-    protected boolean isLeaf(Node node) {
+    boolean isLeaf(Node node) {
         return node.rightSon == null && node.leftSon == null;
     }
 
@@ -276,7 +258,7 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
      * @param node The node to be checked.
      * @return The single child of the node if it has exactly one child, null otherwise.
      */
-    protected Node singleChilded(Node node) {
+    Node singleChilded(Node node) {
         if (node.leftSon != null && node.rightSon == null) {
             return node.leftSon;
         }
@@ -299,22 +281,58 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
      */
     private void familySwap(Node father, Node child) {
         Node grandfather = father.father;
-        child.father = father.father;
-        changeAncestorsChild(grandfather, father, child);
+        Node rightGrandSon = child.rightSon;
+        Node leftGrandSon = child.leftSon;
+        child.father = grandfather;
+        if (grandfather != null) {
+            changeAncestorsChild(grandfather, father, child);
+        }
         if (child == father.rightSon) {
-            father.leftSon.father = child;
-            child.leftSon = father.leftSon;
+            if (father.leftSon != null) {
+                father.leftSon.father = child;
+                child.leftSon = father.leftSon;
+            }
+            else{
+                child.leftSon = null;
+            }
             child.rightSon = father;
         } else {
-            father.rightSon.father = child;
-            child.rightSon = father.rightSon;
+            if (father.rightSon != null) {
+                father.rightSon.father = child;
+                child.rightSon = father.rightSon;
+            }
+            else{
+                child.rightSon = null;
+            }
             child.leftSon = father;
         }
         father.father = child;
-        father.rightSon = child.rightSon;
-        father.leftSon = child.leftSon;
+        father.rightSon = rightGrandSon;
+        father.leftSon = leftGrandSon;
+        if(rightGrandSon != null) {
+            rightGrandSon.father = father;
+        }
+        if(leftGrandSon != null) {
+            leftGrandSon.father = father;
+        }
+        if (father == root){
+            root = child;
+        }
     }
 
+
+    private void rootSwap(Node successor){
+        successor.leftSon = root.leftSon;
+        successor.rightSon = root.rightSon;
+        root.leftSon.father = successor;
+        root.rightSon.father = successor;
+        root.father = successor.father;
+        changeAncestorsChild(successor.father, successor, root);
+        root.leftSon = null;
+        root.rightSon = null;
+        successor.father = null;
+        root = successor;
+    }
 
     /**
      * Swaps a node and its successor.
@@ -322,15 +340,24 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
      * @param deleteNode a given node.
      * @param successor  its successor.
      */
-    protected void swap(Node deleteNode, Node successor) {
-        Node deleteFather = deleteNode.father;
-        Node deleteRightSon = deleteNode.rightSon;
-        Node deleteLeftSon = deleteNode.leftSon;
-        Node successorFather = successor.father;
+    void swap(Node deleteNode, Node successor) {
+        successor.height = deleteNode.height;
         if (sameFamily(deleteNode, successor)) {
             familySwap(deleteNode, successor);
             return;
         }
+        if (deleteNode  == root){
+            rootSwap(successor);
+            return;
+        }
+
+        Node deleteFather = deleteNode.father;
+        Node deleteRightSon = deleteNode.rightSon;
+        Node deleteLeftSon = deleteNode.leftSon;
+        Node successorFather = successor.father;
+        Node successorRightSon = successor.rightSon;
+
+
         successor.father = deleteFather;
         changeAncestorsChild(deleteFather, deleteNode, successor);
         successor.leftSon = deleteLeftSon;
@@ -340,7 +367,10 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
         deleteNode.father = successorFather;
         changeAncestorsChild(successorFather, successor, deleteNode);
         deleteNode.leftSon = null;
-        deleteNode.rightSon = null;
+        deleteNode.rightSon = successorRightSon;
+        if (successorRightSon != null){
+            successorRightSon.father = deleteNode;
+        }
     }
 
 
@@ -348,7 +378,7 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
      * @param searchVal The value to be searched.
      * @return The expected parent node of the value if it is not in the tree, and null otherwise.
      */
-    protected Node expectedParent(int searchVal) {
+    Node expectedParent(int searchVal) {
         Node candidate = valueToNode(searchVal);
         if (candidate == null || searchVal == candidate.value) {
             return null;
@@ -366,7 +396,7 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
      * @return The expected father node if searchValue is not in the tree, or the node with the same value.
      * Returns null only if the tree is empty.
      */
-    protected Node valueToNode(int searchVal) {
+    Node valueToNode(int searchVal) {
         int depth = 0;
         Node currNode = root;  // The node we're comparing to, and might be returned.
         Node nextNode = root;  // The node we proceed to, or stop if it's null.
