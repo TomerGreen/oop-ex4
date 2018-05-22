@@ -24,7 +24,8 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
         Node rightSon, leftSon, father;
 
         /**
-         * An Empty constructor of Node.
+         * An empty constructor of node
+         * @param value the node's value.
          */
         Node(int value) {
             father = null;
@@ -37,8 +38,8 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
 
         /**
          * A constructor of Node.
-         *
          * @param father The node's father.
+         * @param value The node's value.
          */
         Node(Node father, int value) {
             this.father = father;
