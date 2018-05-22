@@ -435,10 +435,6 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
      * @param successor  its successor.
      */
     void swap(Node deleteNode, Node successor) {
-//        int temp = deleteNode.value;
-//        deleteNode.value = successor.value;
-//        successor.value = temp;
-
         successor.height = deleteNode.height;
         if (sameFamily(deleteNode, successor)) {
             familySwap(deleteNode, successor);
