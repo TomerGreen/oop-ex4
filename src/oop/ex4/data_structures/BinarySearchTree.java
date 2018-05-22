@@ -216,15 +216,86 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
      * @return true if the value to add is not already in the tree and it was successfully added,
      * false otherwise.
      */
-    public abstract boolean add(int newValue);
+    public boolean add(int newValue){
+        Node father = expectedParent(newValue);
+        if (father != null) {
+            Node newNode = new Node(father, newValue);
+            if (newValue > father.value) {
+                father.rightSon = newNode;
+            } else {
+                father.leftSon = newNode;
+            }
+            size++;
+            return true;
+        } else if (father == null && root == null) {     //The tree is empty!
+            root = new Node(newValue);
+            size++;
+            return true;
+        }
+        return false; //newValue is contained in the tree.
+    }
+
+
+    /*
+    A helper method to delete a node if it has a single child. Returns the deleted node's father.
+     */
+    Node singleChildDelete(Node deleteNode, Node singleChild, Node father){
+        if (deleteNode == root){
+            root = singleChild;
+            root.father = null;
+            size--;
+            return null;
+        }
+        singleChild.father = father;
+        changeAncestorsChild(father, deleteNode, singleChild);
+        size--;
+        return deleteNode.father;
+    }
+
+    /*
+    A helper method to delete a node if it is a leaf. Returns the deleted node's father.
+     */
+    Node leafDelete(Node deleteNode, Node father){
+        if (deleteNode == root){ //Tree only has a root
+            root = null;
+            size--;
+            return null;
+        }
+        changeAncestorsChild(father, deleteNode, null);
+        size--;
+        return deleteNode.father;
+    }
 
     /**
      * Removes the node with the given value from the tree, if it exists.
-     *
      * @param toDelete The value to be deleted.
      * @return True if was successfully deleted, false otherwise.
      */
-    public abstract boolean delete(int toDelete);
+    public boolean delete(int toDelete) {
+        Node deleteNode = valueToNode(toDelete);
+        if (deleteNode == null || deleteNode.value != toDelete) {
+            return false; //value is not in the tree
+        }
+        Node father = deleteNode.father;
+        if (isLeaf(deleteNode)) {   //Checks if toDelete is a leaf.
+            leafDelete(deleteNode, father);
+            return true;
+        }
+        Node singleChild = singleChilded(deleteNode);
+        if (singleChild != null) {   //Checks if toDelete has only one child.
+            singleChildDelete(deleteNode, singleChild, father);
+            return true;
+        }
+        Node successor = deleteNode.getSuccessor();
+        swap(deleteNode, successor);
+        father = deleteNode.father;
+        if (!isLeaf(deleteNode)){ //the original successor had a right son.
+            singleChildDelete(deleteNode, deleteNode.rightSon, father);
+            return true;
+        }
+        leafDelete(deleteNode, father);
+        return true;
+    }
 
     /**
      * Changes an ancestor's oldSon with a newSon
@@ -335,12 +406,38 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
     }
 
     /**
+     * Returns the bigger son of a given father. Returns null if father has a leaf.
+     * If both sons have the same height, returns the left son.
+     * @param father The father node.
+     * @return The bigger son, null if father is leaf.
+     */
+    Node getBiggerSon(Node father){
+        if (isLeaf(father)){
+            return null;
+        }
+        else if (father.rightSon == null){
+            return father.leftSon;
+        }
+        else if (father.leftSon == null){
+            return father.rightSon;
+        }
+
+        else if (father.rightSon.height > father.leftSon.height){
+            return father.rightSon;
+        }
+        return father.leftSon;
+    }
+
+    /**
      * Swaps a node and its successor.
-     *
      * @param deleteNode a given node.
      * @param successor  its successor.
      */
     void swap(Node deleteNode, Node successor) {
+//        int temp = deleteNode.value;
+//        deleteNode.value = successor.value;
+//        successor.value = temp;
+
         successor.height = deleteNode.height;
         if (sameFamily(deleteNode, successor)) {
             familySwap(deleteNode, successor);
@@ -350,14 +447,11 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
             rootSwap(successor);
             return;
         }
-
         Node deleteFather = deleteNode.father;
         Node deleteRightSon = deleteNode.rightSon;
         Node deleteLeftSon = deleteNode.leftSon;
         Node successorFather = successor.father;
         Node successorRightSon = successor.rightSon;
-
-
         successor.father = deleteFather;
         changeAncestorsChild(deleteFather, deleteNode, successor);
         successor.leftSon = deleteLeftSon;
@@ -371,6 +465,7 @@ public abstract class BinarySearchTree implements Iterable<Integer> {
         if (successorRightSon != null){
             successorRightSon.father = deleteNode;
         }
+
     }
 
 
